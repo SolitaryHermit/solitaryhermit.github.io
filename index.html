@@ -1,1 +1,270 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Jane Doe | Academic Homepage</title>
+    <style>
+        /* CSS Variables for easy color customization */
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222222;
+            --accent-color: #0056b3; /* Classic academic blue */
+            --muted-color: #666666;
+            --border-color: #e5e5e5;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            padding: 0 1.5rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header / Profile */
+        header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #ddd; /* Placeholder background */
+            flex-shrink: 0;
+        }
+
+        .profile-info h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-info .title {
+            font-size: 1.1rem;
+            color: var(--muted-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* Navigation */
+        nav {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 0;
+            margin-bottom: 2.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            font-weight: 500;
+        }
+
+        nav a {
+            color: var(--text-color);
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Main Content Sections */
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--text-color);
+            padding-bottom: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Publication List */
+        .pub-list {
+            list-style: none;
+        }
+
+        .pub-item {
+            margin-bottom: 1.25rem;
+        }
+
+        .pub-title {
+            font-weight: 600;
+        }
+
+        .pub-authors {
+            color: var(--muted-color);
+            font-size: 0.95rem;
+        }
+
+        .pub-venue {
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .pub-links {
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            color: var(--muted-color);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header / Bio Overview -->
+        <header>
+            <!-- Replace src with your profile photo URL -->
+            <img src="https://via.placeholder.com/150" alt="Dr. Jane Doe" class="profile-img">
+            <div class="profile-info">
+                <h1>Dr. Jane Doe</h1>
+                <p class="title">Assistant Professor of Computer Science</p>
+                <p class="institution">University of Academic Research</p>
+                <div class="social-links">
+                    <a href="mailto:jane.doe@university.edu">Email</a>
+                    <a href="#" target="_blank">Google Scholar</a>
+                    <a href="#" target="_blank">CV (PDF)</a>
+                    <a href="#" target="_blank">GitHub</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Bar -->
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#teaching">Teaching</a></li>
+                <li><a href="#service">Service</a></li>
+            </ul>
+        </nav>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                Welcome to my homepage! I am an Assistant Professor in the Department of Computer Science at the University of Academic Research. My research broadly focuses on **Machine Learning**, **Human-AI Interaction**, and **Computational Social Science**.
+            </p>
+            <br>
+            <p>
+                Prior to joining the faculty, I completed my Ph.D. at Tech University under the supervision of Prof. Alex Smith. I am always open to collaborations—feel free to reach out via email!
+            </p>
+        </section>
+
+        <!-- Selected Publications Section -->
+        <section id="publications">
+            <h2>Selected Publications</h2>
+            <ul class="pub-list">
+                
+                <li class="pub-item">
+                    <div class="pub-title">Understanding Neural Networks Through Minimalist Visualization</div>
+                    <div class="pub-authors"><strong>Jane Doe</strong>, John Smith, Alice Johnson</div>
+                    <div class="pub-venue">Journal of Machine Learning Research (JMLR), 2025</div>
+                    <div class="pub-links">
+                        <a href="#">[PDF]</a> <a href="#">[Code]</a> <a href="#">[BibTeX]</a>
+                    </div>
+                </li>
+
+                <li class="pub-item">
+                    <div class="pub-title">Evaluating Academic Web Interfaces for Usability and Accessibility</div>
+                    <div class="pub-authors">Bob Lee, <strong>Jane Doe</strong></div>
+                    <div class="pub-venue">ACM Conference on Human Factors in Computing Systems (CHI), 2024</div>
+                    <div class="pub-links">
+                        <a href="#">[PDF]</a> <a href="#">[Talk]</a> <a href="#">[BibTeX]</a>
+                    </div>
+                </li>
+
+            </ul>
+        </section>
+
+        <!-- Teaching Section -->
+        <section id="teaching">
+            <h2>Teaching</h2>
+            <ul>
+                <li><strong>CS 101:</strong> Introduction to Computer Science (Fall 2025, Fall 2024)</li>
+                <li><strong>CS 502:</strong> Advanced Topics in Human-AI Interaction (Spring 2025)</li>
+            </ul>
+        </section>
+
+        <!-- Service Section -->
+        <section id="service">
+            <h2>Service</h2>
+            <ul>
+                <li><strong>Program Committee / Reviewer:</strong> NeurIPS, ICML, CHI, UIST</li>
+                <li><strong>Departmental Service:</strong> Graduate Admissions Committee (2024–2025)</li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Jane Doe. Built with plain HTML & CSS.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
