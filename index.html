@@ -4,175 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jiamin Pan | Academic Homepage</title>
-    <style>
-        /* CSS Variables for easy color customization */
-        :root {
-            --bg-color: #fcfcfc;
-            --text-color: #222222;
-            --accent-color: #0056b3; /* Classic academic blue */
-            --muted-color: #666666;
-            --border-color: #e5e5e5;
-            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    <!-- Linking the new combined CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- MathJax Setup for LaTeX & MathML -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
         }
-
-        /* Base Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-family);
-            line-height: 1.6;
-            padding: 0 1.5rem;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 3rem 0;
-        }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Header / Profile */
-        header {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .profile-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: #ddd; /* Placeholder background */
-            flex-shrink: 0;
-        }
-
-        .profile-info h1 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-
-        .profile-info .title {
-            font-size: 1.1rem;
-            color: var(--muted-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            font-size: 0.95rem;
-        }
-
-        /* Navigation */
-        nav {
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            padding: 0.75rem 0;
-            margin-bottom: 2.5rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-            font-weight: 500;
-        }
-
-        nav a {
-            color: var(--text-color);
-        }
-
-        nav a:hover {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        /* Main Content Sections */
-        section {
-            margin-bottom: 3rem;
-        }
-
-        h2 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            border-bottom: 2px solid var(--text-color);
-            padding-bottom: 0.3rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Publication List */
-        .pub-list {
-            list-style: none;
-        }
-
-        .pub-item {
-            margin-bottom: 1.25rem;
-        }
-
-        .pub-title {
-            font-weight: 600;
-        }
-
-        .pub-authors {
-            color: var(--muted-color);
-            font-size: 0.95rem;
-        }
-
-        .pub-venue {
-            font-style: italic;
-            font-size: 0.95rem;
-        }
-
-        .pub-links {
-            font-size: 0.85rem;
-            margin-top: 0.2rem;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
-            color: var(--muted-color);
-            font-size: 0.85rem;
-            text-align: center;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-
-            nav ul {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .social-links {
-                justify-content: center;
-            }
-        }
-    </style>
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
@@ -180,27 +24,33 @@
         <!-- Header / Bio Overview -->
         <header>
             <!-- Replace src with your profile photo URL -->
-            <img src="IMG_1200.jpeg" alt="Dr. Jane Doe" class="profile-img">
+            <img src="IMG_1200.jpeg" alt="Jiamin Pan" class="profile-img">
             <div class="profile-info">
                 <h1>Jiamin Pan</h1>
                 <p class="title">Ph.D. Candidate in Mathematics</p>
                 <p class="institution">Georgia State University</p>
                 <div class="social-links">
-                    <a href="mailto:jpan@gsu.edu">Email</a>
-                    <!-- <a href="#" target="_blank">Google Scholar</a>
+                    Email: jpan4 at gsu dot edu
+                    <!-- <a href="mailto:jpan@gsu.edu">Email</a>
+                    <a href="#" target="_blank">Google Scholar</a>
                     <a href="#" target="_blank">CV (PDF)</a>
                     <a href="#" target="_blank">GitHub</a> -->
                 </div>
             </div>
         </header>
 
+        <a href="blog_test.html" class="blog-link">Check out my blog for research notes and math results!</a>
+
         <!-- Navigation Bar -->
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
-                <li><a href="#publications">Publications</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#publications">Publications & Preprints</a></li>
                 <li><a href="#teaching">Teaching</a></li>
-                <li><a href="#service">Service</a></li>
+                <li><a href="#service">Work Experiences</a></li>
+                <li><a href="#talk">Talks</a></li>
+                <!-- <li><a href="#award">Awards</a></li> -->
             </ul>
         </nav>
 
@@ -208,35 +58,63 @@
         <section id="about">
             <h2>About Me</h2>
             <p>
-                Welcome to my homepage! I am an Assistant Professor in the Department of Computer Science at the University of Academic Research. My research broadly focuses on **Machine Learning**, **Human-AI Interaction**, and **Computational Social Science**.
+                Welcome to my homepage! I am a Ph.D. candidate in Mathematics at Georgia State University under the supervision of Prof. <a href="https://math.gsu.edu/fenescu/">Florian Enescu</a>. My research focuses on Frobenius complexity and its applications in algebraic geometry, as well as some sign-pattern problems in combinatorial matrix theory. I am passionate about exploring the deep connections between algebra, combinatorics, and geometry, and I enjoy collaborating with fellow researchers in these areas.
             </p>
-            <br>
+
             <p>
-                Prior to joining the faculty, I completed my Ph.D. at Tech University under the supervision of Prof. Alex Smith. I am always open to collaborations—feel free to reach out via email!
+                In addition to my research, I have a strong interest in teaching and mentoring students. I have served as a teaching assistant or main instructor for various mathematics courses, ranging from introductory algebra to advanced calculus. I am committed to fostering an inclusive and engaging learning environment where students can develop their mathematical skills and confidence.
+            </p>
+            
+            <p>
+                Finally, I am also working on a handbook for algebra researchers in a similar fashion to the <a href="https://stacks.math.columbia.edu">Stacks Project</a> (though with more detailed and accessible proofs!!). One can download a draft version of the book from <a href="https://github.com/SolitaryHermit/algnotes/blob/main/algebra.pdf">here</a> if interested (sorry for any existing typos...).
+            </p>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h2>Education</h2>
+            <p>
+                <strong>Ph.D. in Mathematics</strong>, Georgia State University, 2026 (expected)<br>
+                <strong>SLMath Graduate Summer School:</strong> <a href="https://www.slmath.org/summer-schools/1150">Singularities in Commutative Algebra Through Cohomological Methods</a>, Simon Laufer Mathematical Sciences Institute, 07/06/2026-07/18/2026<br>
+                <strong>M.S. in Science</strong>, Major: <em>Mathematics</em>, Concentration: <em>Statistics</em>, Georgia State University, 2022<br>
+                <strong>Graduate Preparation Program in Engineering (GPP-E)</strong>, Major: <em>Computer Science</em>, University of California - Riverside, 2018-2019<br>
+                <strong>B.S. in Engineering</strong>, Major: <em>Software Engineering</em>, Huazhong University of Science and Technology, 2019
             </p>
         </section>
 
         <!-- Selected Publications Section -->
         <section id="publications">
-            <h2>Selected Publications</h2>
+            <h2>Publications & Preprints</h2>
             <ul class="pub-list">
                 
                 <li class="pub-item">
-                    <div class="pub-title">Understanding Neural Networks Through Minimalist Visualization</div>
-                    <div class="pub-authors"><strong>Jane Doe</strong>, John Smith, Alice Johnson</div>
-                    <div class="pub-venue">Journal of Machine Learning Research (JMLR), 2025</div>
-                    <div class="pub-links">
-                        <a href="#">[PDF]</a> <a href="#">[Code]</a> <a href="#">[BibTeX]</a>
-                    </div>
+                    <div class="pub-title">On the finiteness of the twisted complexity for a graded ring in prime characteristic</div>
+                    <div class="pub-authors"><strong>Florian Enescu</strong>, Jiamin Pan</div>
+                    <div class="pub-venue">Accepted by Bulletin Mathématique, 2026</div>
                 </li>
 
                 <li class="pub-item">
-                    <div class="pub-title">Evaluating Academic Web Interfaces for Usability and Accessibility</div>
-                    <div class="pub-authors">Bob Lee, <strong>Jane Doe</strong></div>
-                    <div class="pub-venue">ACM Conference on Human Factors in Computing Systems (CHI), 2024</div>
-                    <div class="pub-links">
-                        <a href="#">[PDF]</a> <a href="#">[Talk]</a> <a href="#">[BibTeX]</a>
-                    </div>
+                    <div class="pub-title">The rank-preserving transversality property</div>
+                    <div class="pub-authors">Marina Arav, Frank Hall, Alfred Hart, Hendricus van der Holst, <strong>Zhongshan Li</strong>, Zixuan Li, Jian Liu, Jiamin Pan, Joonwon Seo, Li Wang, Hanfei Xu, Yiran Xu, Yue Zhao, Zheng Yang</div>
+                    <div class="pub-venue">Submitted to Linear and Multilinear Algebra, 2026</div>
+                </li>
+
+                <li class="pub-item">
+                    <div class="pub-title">Computing Boolean functions from polynomial ideals with prescribed zeros</div>
+                    <div class="pub-authors"><strong>Florian Enescu</strong>, Priyank Kalla, and Jiamin Pan</div>
+                    <div class="pub-venue">Journal of Algebra and Its Applications, 2025, doi: <a href="https://doi.org/10.1142/S0219498826502762">10.1142/S0219498826502762</a> </div>
+                </li>
+
+                <li class="pub-item">
+                    <div class="pub-title">Orthogonal similarity and transversal intersection of manifolds</div>
+                    <div class="pub-authors">Marina Arav, Frank J. Hall, Hein van der Holst, <strong>Zhongshan Li</strong>, Zixuan Li, Jiamin Pan, Hanfei Xu, Yiran Xu, Zheng Yang</div>
+                    <div class="pub-venue">Communications in Optimization Theory, Vol. 2025 (2025), Article ID 27, pp. 1-21. doi: <a href="https://doi.org/10.23952/cot.2025.27">10.23952/cot.2025.27</a> </div>
+                </li>
+
+                <li class="pub-item">
+                    <div class="pub-title">Advances on similarity via transversal intersection of manifolds</div>
+                    <div class="pub-authors">Marina Arav, Frank J. Hall, Hein van der Holst, <strong>Zhongshan Li</strong>, Aram Mathivanan, Jiamin Pan, Hanfei Xu, Zheng Yang</div>
+                    <div class="pub-venue">Linear Algebra and its Applications, Volume 721 (2025), 102-121. doi: <a href="https://doi.org/10.1016/j.laa.2024.05.013">10.1016/j.laa.2024.05.013</a> </div>
                 </li>
 
             </ul>
@@ -244,25 +122,50 @@
 
         <!-- Teaching Section -->
         <section id="teaching">
-            <h2>Teaching</h2>
+            <h2>Teaching Experiences</h2>
             <ul>
-                <li><strong>CS 101:</strong> Introduction to Computer Science (Fall 2025, Fall 2024)</li>
-                <li><strong>CS 502:</strong> Advanced Topics in Human-AI Interaction (Spring 2025)</li>
+                <li><strong>MATH 0999:</strong> Support for College Algebra (Spring 2022)</li>
+                <li><strong>MATH 1001:</strong> Quantitative Reasoning (Spring 2021)</li>
+                <li><strong>MATH 1111:</strong> College Algebra (Fall 2021, Spring 2022, Fall 2022, Summer 2023)</li>
+                <li><strong>MATH 1113:</strong> Precalculus (TA) (Summer 2026)</li>
+                <li><strong>MATH 1401:</strong> Elementary Statistics (TA) (Fall 2019, Spring 2020, Fall 2020)</li>
+                <li><strong>MATH 2211:</strong> Calculus of One Variable I (Main Instructor: Summer 2024, Recitation Instructor: Fall 2024)</li>
+                <li><strong>MATH 2212:</strong> Calculus of One Variable II (Recitation) (Fall 2023, Spring 2024, Spring 2025, Fall 2025, Spring 2026)</li>
             </ul>
         </section>
 
         <!-- Service Section -->
         <section id="service">
-            <h2>Service</h2>
+            <h2>Service & Work Experiences</h2>
             <ul>
-                <li><strong>Program Committee / Reviewer:</strong> NeurIPS, ICML, CHI, UIST</li>
-                <li><strong>Departmental Service:</strong> Graduate Admissions Committee (2024–2025)</li>
+                <li><strong>Program Reviewer:</strong> Math Path Summer Program (05/2022); D-Map Summer Program (02/2025); Math Path Fall Assistantship (09/2025)</li>
+                <li><strong>AI Trainer - Mathematics Expert:</strong> The <a href="https://joinhandshake.com/fellowship-program/opportunities/math-ai-trainer">Handshake Model Validation Expert (MOVE) Fellowship</a>, 06/2025-08/2025</li>
             </ul>
         </section>
 
+        <!-- Talks Section -->
+        <section id="talk">
+            <h2>Past Talks</h2>
+            <ul>
+                <li><a href="https://scholarlattice.org/submissions/d3822a40-7d00-4036-add0-dd36d71b70a8">Properties of Uniformly $F$-Compatible Ideals</a>, 105th Annual MAA-SE Section Meeting, Florence, AL, USA, 03/2026</li>
+                <li>Computing Boolean Functions from Polynomial Ideals with Prescribed Zeros, <a href="https://cats-math.github.io/">Commutative Algebra in The South</a>, Atlanta, GA, USA, 04/2025</li>
+                <li>Matrices with the Rank-Preserving Transversality Property, Departmental End-of-the-Year Celebration, Atlanta, GA, USA, 04/2025</li>
+            </ul>
+        </section>
+
+        <!-- Awards Section -->
+        <!-- <section id="award">
+            <h2>Awards</h2>
+            <ul>
+                <li>V.V. Lavroff Graduate Award, 2025</li>
+                <li>Wiley M. Suttles Math Award, 2023 & 2024</li>
+                <li><a href="https://gsu.meritpages.com/stories/Jiamin-Pan-Receives-Teaching-Assistant-Award/109223353">Best Graduate Teaching Assistant Award</a>, 2023</li>
+            </ul>
+        </section> -->
+
         <!-- Footer -->
         <footer>
-            <p>&copy; 2026 Jane Doe. Built with plain HTML & CSS.</p>
+            <p>&copy; 2026 Jiamin Pan. Built with plain HTML & CSS.</p>
         </footer>
     </div>
 

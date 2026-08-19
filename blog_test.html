@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Results & Formal Proofs</title>
+
+    <!-- Linking the new combined CSS file -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- MathJax Setup for LaTeX Rendering -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<!-- Added math-page class to enable auto-numbering -->
+<body class="math-page">
+
+    <div class="container">
+        <nav class="back-nav"><a href="index.html">← Back to Homepage</a></nav>
+        
+        <header>
+            <h1>Spectral Bounds in Graph Optimization</h1>
+            <p class="math-subtitle">Working notes and formal statements — Updated July 2026</p>
+        </header>
+
+        <main>
+            <!-- SECTION 1 -->
+            <section>
+                <h2>Foundational Definitions</h2>
+
+                <div class="math-block definition">
+                    <div class="math-title">(Graph Laplacian)</div>
+                    <p>
+                        Let $G = (V, E)$ be an unweighted, undirected graph with $n$ vertices. The <strong>Graph Laplacian</strong> $\mathbf{L} \in \mathbb{R}^{n \times n}$ is defined as:
+                    </p>
+                    $$ \mathbf{L} = \mathbf{D} - \mathbf{A} $$
+                    <p>where $\mathbf{D}$ is the degree matrix and $\mathbf{A}$ is the adjacency matrix.</p>
+                </div>
+
+                <div class="math-block lemma">
+                    <div class="math-title">(Positive Semi-Definiteness)</div>
+                    <p>
+                        For any real vector $x \in \mathbb{R}^n$, the quadratic form of the Laplacian satisfies:
+                    </p>
+                    $$ x^\top \mathbf{L} x = \sum_{(i,j) \in E} (x_i - x_j)^2 $$
+                    <p>Consequently, $\mathbf{L}$ is positive semi-definite ($\mathbf{L} \succeq 0$).</p>
+
+                    <details class="proof">
+                        <summary>Proof (Click to expand)</summary>
+                        <p>
+                            By definition, $x^\top \mathbf{L} x = x^\top \mathbf{D} x - x^\top \mathbf{A} x$. Expanding the sum:
+                        </p>
+                        $$ x^\top \mathbf{D} x = \sum_{i \in V} d_i x_i^2 \quad \text{and} \quad x^\top \mathbf{A} x = 2 \sum_{(i,j) \in E} x_i x_j $$
+                        <p>
+                            Combining terms yields $\sum_{(i,j) \in E} (x_i^2 - 2x_i x_j + x_j^2) = \sum_{(i,j) \in E} (x_i - x_j)^2 \ge 0$.
+                            <span class="qedsymbol">$\blacksquare$</span>
+                        </p>
+                    </details>
+                </div>
+            </section>
+
+            <!-- SECTION 2 -->
+            <section>
+                <h2>Spectral Properties</h2>
+
+                <div class="math-block theorem">
+                    <div class="math-title">(Spectral Gap Bound)</div>
+                    <p>
+                        Let $\lambda_2(\mathbf{L})$ denote the algebraic connectivity (second smallest eigenvalue) of $\mathbf{L}$. If $G$ is connected, then:
+                    </p>
+                    $$ \lambda_2(\mathbf{L}) \ge \frac{1}{n \cdot \text{diam}(G)} $$
+                </div>
+
+                <div class="math-block corollary">
+                    <div class="math-title">(Mixing Time Implication)</div>
+                    <p>
+                        The random walk on graph $G$ converges to the uniform distribution in $O\left(\frac{\log n}{\lambda_2}\right)$ steps.
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

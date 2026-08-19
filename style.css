@@ -1,0 +1,291 @@
+/* =========================================
+   1. Root Variables & Theme Colors
+   ========================================= */
+:root {
+    --bg-color: #fcfcfc;
+    --text-color: #222222;
+    --accent-color: #0056b3; /* Classic academic blue */
+    --muted-color: #666666;
+    --border-color: #e5e5e5;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    
+    /* Math Environment Colors */
+    --def-color: #0284c7;  
+    --thm-color: #6366f1;  
+    --cor-color: #059669;  
+    --lem-color: #d97706;  
+    --proof-bg: #f8fafc;
+}
+
+/* =========================================
+   2. Base Styles & Reset
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    line-height: 1.6;
+    padding: 0 1.5rem;
+}
+
+.container {
+    max-width: 800px; /* Optimized for both profiles and reading */
+    margin: 0 auto;
+    padding: 3rem 0;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--text-color);
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+/* =========================================
+   3. Homepage Specific Styles
+   ========================================= */
+header.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.profile-img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ddd;
+    flex-shrink: 0;
+}
+
+.profile-info h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.profile-info .title {
+    font-size: 1.1rem;
+    color: var(--muted-color);
+    margin-bottom: 0.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Default Navigation (Applies to index.html) */
+nav {
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.75rem 0;
+    margin-bottom: 2.5rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    font-weight: 500;
+}
+
+nav a {
+    color: var(--text-color);
+}
+
+nav a:hover {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Math Page Navigation Override */
+.math-page nav {
+    border: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.math-page nav a {
+    color: var(--def-color);
+    font-weight: 500;
+}
+
+.pub-list {
+    list-style: none;
+}
+
+.pub-item {
+    margin-bottom: 1.25rem;
+}
+
+.pub-title {
+    font-weight: 600;
+}
+
+.pub-authors {
+    color: var(--muted-color);
+    font-size: 0.95rem;
+}
+
+.pub-venue {
+    font-style: italic;
+    font-size: 0.95rem;
+}
+
+.pub-links {
+    font-size: 0.85rem;
+    margin-top: 0.2rem;
+}
+
+footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    color: var(--muted-color);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* =========================================
+   4. Math Notes Specific Styles
+   ========================================= */
+
+/* Top navigation link for the math page */
+nav.back-nav {
+    margin-bottom: 2rem;
+}
+nav.back-nav a {
+    font-weight: 500;
+}
+
+.math-subtitle {
+    color: var(--muted-color);
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+/* Auto-Numbering Logic (Scoped to .math-page) */
+body.math-page {
+    counter-reset: section-count 0;
+}
+
+.math-page section {
+    counter-increment: section-count;
+    counter-reset: definition-count 0 lemma-count 0 theorem-count 0;
+    margin-top: 2rem;
+}
+
+.math-page section h2::before {
+    content: "Section " counter(section-count) ": ";
+}
+
+/* Math Block Containers */
+.math-block {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-left-width: 5px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.math-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Environment Logic & Colors */
+.definition { border-left-color: var(--def-color); counter-increment: definition-count; }
+.definition .math-title { color: var(--def-color); }
+.definition .math-title::before { content: "Definition " counter(section-count) "." counter(definition-count) " "; }
+
+.lemma { border-left-color: var(--lem-color); counter-increment: lemma-count; }
+.lemma .math-title { color: var(--lem-color); }
+.lemma .math-title::before { content: "Lemma " counter(section-count) "." counter(lemma-count) " "; }
+
+.theorem { border-left-color: var(--thm-color); counter-increment: theorem-count; counter-reset: corollary-count 0; }
+.theorem .math-title { color: var(--thm-color); }
+.theorem .math-title::before { content: "Theorem " counter(section-count) "." counter(theorem-count) " "; }
+
+.corollary { border-left-color: var(--cor-color); counter-increment: corollary-count; font-style: italic; }
+.corollary .math-title { color: var(--cor-color); }
+.corollary .math-title::before { content: "Corollary " counter(section-count) "." counter(theorem-count) "." counter(corollary-count) " "; font-style: normal; }
+
+/* Foldable Proofs */
+details.proof {
+    margin-top: 0.75rem;
+    background-color: var(--proof-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+}
+
+details.proof summary {
+    font-weight: 600;
+    font-style: italic;
+    cursor: pointer;
+    color: var(--muted-color);
+    user-select: none;
+}
+
+details.proof summary:hover { color: var(--text-color); }
+details.proof[open] summary {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.qedsymbol {
+    float: right;
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   5. Mobile Responsiveness
+   ========================================= */
+@media (max-width: 600px) {
+    header.profile-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+}
