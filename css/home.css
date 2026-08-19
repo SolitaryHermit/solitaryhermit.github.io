@@ -1,0 +1,23 @@
+header.profile-header {
+    display: flex; align-items: center; gap: 2rem; margin-bottom: 2.5rem;
+}
+.profile-img {
+    width: 140px; height: 140px; border-radius: 50%;
+    object-fit: cover; background-color: #ddd; flex-shrink: 0;
+}
+.profile-info h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.2rem; }
+.profile-info .title { font-size: 1.1rem; color: var(--muted-color); margin-bottom: 0.5rem; }
+.social-links { display: flex; gap: 1rem; font-size: 0.95rem; }
+
+.pub-list { list-style: none; }
+.pub-item { margin-bottom: 1.25rem; }
+.pub-title { font-weight: 600; }
+.pub-authors { color: var(--muted-color); font-size: 0.95rem; }
+.pub-venue { font-style: italic; font-size: 0.95rem; }
+.pub-links { font-size: 0.85rem; margin-top: 0.2rem; }
+
+@media (max-width: 600px) {
+    header.profile-header { flex-direction: column; text-align: center; gap: 1rem; }
+    nav ul { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+    .social-links { justify-content: center; }
+}
