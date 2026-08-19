@@ -7,7 +7,37 @@ header.profile-header {
 }
 .profile-info h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.2rem; }
 .profile-info .title { font-size: 1.1rem; color: var(--muted-color); margin-bottom: 0.5rem; }
-.social-links { display: flex; gap: 1rem; font-size: 0.95rem; }
+/* Container for the buttons */
+.social-links {
+    display: flex;
+    flex-wrap: wrap; /* Ensures buttons wrap nicely on small mobile screens */
+    gap: 0.75rem; 
+    margin-top: 0.75rem; /* Adds breathing room below the institution text */
+}
+
+/* The Ghost Button Style */
+.social-links a.profile-btn {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    color: var(--accent-color);
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    border-radius: 6px; 
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out; /* Creates a smooth fade effect */
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.4rem;
+}
+
+/* The Hover Effect */
+.social-links a.profile-btn:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    text-decoration: none;
+}
 
 .pub-list { list-style: none; }
 .pub-item { margin-bottom: 1.25rem; }
