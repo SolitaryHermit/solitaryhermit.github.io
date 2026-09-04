@@ -1,74 +1,411 @@
+/* ==========================================================================
+   Math Environments, Counter Logic, and Blog Styles
+   ========================================================================== */
+
 :root {
-    --def-color: #0284c7;  
-    --thm-color: #6366f1;  
-    --cor-color: #059669;  
-    --lem-color: #d97706;  
+    /* Math Environment Border & Title Colors */
+    --def-color: #0284c7;  /* Cyan */
+    --lem-color: #d97706;  /* Amber */
+    --thm-color: #6366f1;  /* Indigo */
+    --cor-color: #059669;  /* Emerald */
+    --ex-color:  #0d9488;  /* Teal for Examples */
+    
+    /* Backgrounds & Neutral Accents */
     --proof-bg: #f8fafc;
     --tag-bg-color: #f3f4f6;
 }
 
-/* Math Page Navigation Override */
-.math-page nav { border: none; padding: 0; margin-bottom: 2rem; }
-.math-page nav a { color: var(--def-color); font-weight: 500; }
+/* ==========================================================================
+   1. Math Page Navigation Override
+   ========================================================================== */
+.math-page nav {
+    border: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
 
-.math-subtitle { color: var(--muted-color); font-style: italic; margin-bottom: 2rem; }
+.math-page nav a {
+    color: var(--def-color);
+    font-weight: 500;
+}
 
-/* Auto-Numbering Logic */
-body.math-page { counter-reset: section-count 0; }
+.math-subtitle {
+    color: var(--muted-color);
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   2. Auto-Numbering Logic (Hierarchical Scoping)
+   ========================================================================== */
+body.math-page {
+    counter-reset: section-count 0;
+}
+
 .math-page section {
     counter-increment: section-count;
-    counter-reset: definition-count 0 lemma-count 0 theorem-count 0;
+    /* Resets all environment counters at the start of each section */
+    counter-reset: definition-count 0 lemma-count 0 theorem-count 0 example-count 0;
     margin-top: 2rem;
 }
-.math-page section h2::before { content: "Section " counter(section-count) ": "; }
 
-/* Math Block Containers */
+.math-page section h2::before {
+    content: "§" counter(section-count) ": ";
+}
+
+/* ==========================================================================
+   3. Math Block Containers & Environment Logic
+   ========================================================================== */
 .math-block {
-    margin: 1.5rem 0; padding: 1rem 1.25rem;
-    background-color: #ffffff; border: 1px solid var(--border-color);
-    border-left-width: 5px; border-radius: 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-left-width: 5px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
-.math-block p:last-child { margin-bottom: 0; }
-.math-title { font-weight: 700; margin-bottom: 0.5rem; display: block; }
 
-/* Environment Logic & Colors */
-.definition { border-left-color: var(--def-color); counter-increment: definition-count; }
-.definition .math-title { color: var(--def-color); }
-.definition .math-title::before { content: "Definition " counter(section-count) "." counter(definition-count) " "; }
+.math-block p:last-child {
+    margin-bottom: 0;
+}
 
-.lemma { border-left-color: var(--lem-color); counter-increment: lemma-count; }
-.lemma .math-title { color: var(--lem-color); }
-.lemma .math-title::before { content: "Lemma " counter(section-count) "." counter(lemma-count) " "; }
+.math-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: block;
+}
 
-.theorem { border-left-color: var(--thm-color); counter-increment: theorem-count; counter-reset: corollary-count 0; }
-.theorem .math-title { color: var(--thm-color); }
-.theorem .math-title::before { content: "Theorem " counter(section-count) "." counter(theorem-count) " "; }
+/* Definition */
+.definition {
+    border-left-color: var(--def-color);
+    counter-increment: definition-count;
+}
+.definition .math-title {
+    color: var(--def-color);
+}
+.definition .math-title::before {
+    content: "Definition " counter(section-count) "." counter(definition-count) " ";
+}
 
-.corollary { border-left-color: var(--cor-color); counter-increment: corollary-count; font-style: italic; }
-.corollary .math-title { color: var(--cor-color); }
-.corollary .math-title::before { content: "Corollary " counter(section-count) "." counter(theorem-count) "." counter(corollary-count) " "; font-style: normal; }
+/* Lemma */
+.lemma {
+    border-left-color: var(--lem-color);
+    counter-increment: lemma-count;
+}
+.lemma .math-title {
+    color: var(--lem-color);
+}
+.lemma .math-title::before {
+    content: "Lemma " counter(section-count) "." counter(lemma-count) " ";
+}
 
-/* Foldable Proofs */
+/* Theorem & Corollary Hierarchy */
+.theorem {
+    border-left-color: var(--thm-color);
+    counter-increment: theorem-count;
+    counter-reset: corollary-count 0; /* Resets corollary counter per theorem */
+}
+.theorem .math-title {
+    color: var(--thm-color);
+}
+.theorem .math-title::before {
+    content: "Theorem " counter(section-count) "." counter(theorem-count) " ";
+}
+
+.corollary {
+    border-left-color: var(--cor-color);
+    counter-increment: corollary-count;
+    font-style: italic;
+}
+.corollary .math-title {
+    color: var(--cor-color);
+}
+.corollary .math-title::before {
+    content: "Corollary " counter(section-count) "." counter(theorem-count) "." counter(corollary-count) " ";
+    font-style: normal;
+}
+
+/* Example Block (Non-italic, Section-relative numbering) */
+.example {
+    border-left-color: var(--ex-color);
+    counter-increment: example-count;
+}
+.example .math-title {
+    color: var(--ex-color);
+}
+.example .math-title::before {
+    content: "Example " counter(section-count) "." counter(example-count) " ";
+}
+
+/* ==========================================================================
+   4. Foldable Proofs
+   ========================================================================== */
 details.proof {
-    margin-top: 0.75rem; background-color: var(--proof-bg);
-    border: 1px solid var(--border-color); border-radius: 4px; padding: 0.5rem 1rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1.25rem; /* Adds space before following text */
+    background-color: var(--proof-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
-details.proof summary {
-    font-weight: 600; font-style: italic; cursor: pointer; color: var(--muted-color); user-select: none;
-}
-details.proof summary:hover { color: var(--text-color); }
-details.proof[open] summary {
-    margin-bottom: 0.75rem; padding-bottom: 0.25rem; border-bottom: 1px dashed var(--border-color);
-}
-.qedsymbol { float: right; font-size: 1.1rem; }
 
-/* Blog Specific */
-.post-list { list-style: none; display: flex; flex-direction: column; gap: 2rem; }
-.post-item { display: flex; flex-direction: column; gap: 0.35rem; }
-.post-meta { font-size: 0.875rem; color: var(--muted-color); display: flex; gap: 0.75rem; align-items: center; }
-.post-title { font-size: 1.25rem; font-weight: 600; }
-.post-title a { color: var(--accent-color); }
-.post-summary { color: var(--text-color); font-size: 0.95rem; }
-.tags { display: flex; gap: 0.5rem; margin-top: 0.25rem; }
-.tag { font-size: 0.75rem; background: var(--tag-bg-color); color: var(--muted-color); padding: 0.15rem 0.5rem; border-radius: 4px; }
+/* Optional: if the proof is the very last element in the box, remove the extra gap */
+details.proof:last-child {
+    margin-bottom: 0;
+}
+
+/* Ensure MathJax wrappers respect container boundaries */
+mjx-container[jax="CHTML"][display="true"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 0.25rem 0;
+}
+
+details.proof summary {
+    font-weight: 600;
+    font-style: italic;
+    cursor: pointer;
+    color: var(--muted-color);
+    user-select: none;
+}
+
+details.proof summary:hover {
+    color: var(--text-color);
+}
+
+details.proof[open] summary {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+/* Dynamic toggle label for proof summary */
+details.proof summary::after {
+    content: " (Click to expand)";
+    font-weight: 400;
+    font-size: 0.9em;
+    color: var(--muted-color);
+}
+
+details.proof[open] summary::after {
+    content: " (Click to fold)";
+}
+
+.qedsymbol {
+    float: right;
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   5. List Formatting (Standalone, Nested, and Proof Lists)
+   ========================================================================== */
+.math-block ol,
+.math-block ul,
+details.proof ol,
+details.proof ul {
+    margin-block-start: 0.5rem;
+    margin-block-end: 1rem;
+    padding-inline-start: 1.75rem;
+    line-height: 1.6;
+}
+
+.math-block ol, details.proof ol {
+    list-style-type: decimal;
+}
+
+.math-block ul, details.proof ul {
+    list-style-type: disc;
+}
+
+.math-block li,
+details.proof li {
+    margin-bottom: 0.4rem;
+}
+
+/* Nested lists */
+.math-block li > ul,
+.math-block li > ol,
+details.proof li > ul,
+details.proof li > ol {
+    margin-top: 0.35rem;
+    margin-bottom: 0.35rem;
+    padding-inline-start: 1.5rem;
+}
+
+.math-block li > ul,
+details.proof li > ul {
+    list-style-type: circle;
+}
+
+/* Display equations inside list items */
+.math-block li .MathJax_Display,
+details.proof li .MathJax_Display {
+    margin: 0.4rem 0 !important;
+}
+
+/* Remove trailing margins from lists */
+.math-block ol:last-child,
+.math-block ul:last-child,
+details.proof ol:last-child,
+details.proof ul:last-child,
+.math-block li:last-child,
+details.proof li:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   6. Blog Index Specifics
+   ========================================================================== */
+.post-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.post-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.post-meta {
+    font-size: 0.875rem;
+    color: var(--muted-color);
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.post-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.post-title a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    text-decoration: underline;
+}
+
+.post-summary {
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.tag {
+    font-size: 0.75rem;
+    background: var(--tag-bg-color);
+    color: var(--muted-color);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* ==========================================================================
+   References / Bibliography Section
+   ========================================================================== */
+/* Suppress section auto-numbering and incrementing for unnumbered sections */
+.math-page section.unnumbered {
+    counter-increment: none;
+}
+
+.math-page section.unnumbered h2::before {
+    content: none !important;
+}
+
+.references-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.reference-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.reference-key {
+    font-weight: 600;
+    color: var(--muted-color);
+    font-family: monospace;
+    flex-shrink: 0;
+}
+
+.reference-text {
+    color: var(--text-color);
+}
+
+.reference-title {
+    font-style: italic;
+}
+
+.reference-links a {
+    font-size: 0.85rem;
+    margin-left: 0.4rem;
+    color: var(--accent-color);
+}
+
+/* Pagination Controls */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 3rem;
+    list-style: none;
+}
+
+.page-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.2rem;
+    height: 2.2rem;
+    padding: 0 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.page-btn.active {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #ffffff;
+    cursor: default;
+}
+
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
