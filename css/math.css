@@ -61,6 +61,31 @@ body.math-page {
     content: none !important;
 }
 
+/* Back-to-top Button */
+.back-to-top-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    color: var(--muted-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.back-to-top-btn:hover {
+    color: var(--def-color);
+    border-color: var(--def-color);
+}
+
 /* ==========================================================================
    3. Math Block Containers & Environments
    ========================================================================== */
@@ -487,4 +512,146 @@ li > code {
     padding: 0.15em 0.35em;
     border-radius: 3px;
     border: 1px solid var(--border-color, #e2e8f0);
+}
+
+/* ==========================================================================
+   9. Table of Contents (TOC)
+   ========================================================================== */
+.toc-container {
+    background-color: var(--proof-bg, #f8fafc);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+.toc-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted-color);
+}
+
+.toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.toc-item a {
+    color: var(--text-color);
+    text-decoration: none;
+    line-height: 1.4;
+    display: inline-block;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.toc-item a:hover {
+    color: var(--def-color, #0284c7);
+    transform: translateX(3px);
+}
+
+.toc-item.unnumbered a {
+    color: var(--muted-color);
+    font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Option 1: Original Card Layout (Prominent, spacious, matched to math-blocks)
+   HTML: <nav id="toc" class="toc-container card">
+   -------------------------------------------------------------------------- */
+.toc-container.card {
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    max-width: 480px;
+}
+
+.toc-container.card .toc-title {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.toc-container.card .toc-list {
+    gap: 0.4rem;
+}
+
+.toc-container.card .toc-item a {
+    font-size: 0.95rem;
+}
+
+/* --------------------------------------------------------------------------
+   Option 2: Compact Inline Box (Subtle, tighter padding and font size)
+   HTML: <nav id="toc" class="toc-container compact">
+   -------------------------------------------------------------------------- */
+.toc-container.compact {
+    margin: 1.5rem 0 2rem 0;
+    padding: 0.85rem 1.15rem;
+    max-width: 420px;
+}
+
+.toc-container.compact .toc-title {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.toc-container.compact .toc-list {
+    gap: 0.3rem;
+}
+
+.toc-container.compact .toc-item a {
+    font-size: 0.875rem;
+}
+
+/* --------------------------------------------------------------------------
+   Option 3: Sticky Sidebar (Pinned on large screens, inline on mobile)
+   HTML: <nav id="toc" class="toc-container sticky">
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+    .page-layout {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        gap: 3rem;
+        max-width: 1150px;
+        margin: 0 auto;
+    }
+
+    .note-body {
+        flex: 1;
+        max-width: 760px;
+        min-width: 0;
+    }
+
+    .toc-container.sticky {
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+        width: 260px;
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
+        margin: 0;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .toc-container.sticky .toc-title {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .toc-container.sticky .toc-list {
+        gap: 0.45rem;
+    }
+
+    .toc-container.sticky .toc-item a {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 1023px) {
+    .toc-container.sticky {
+        margin: 1.5rem 0 2rem 0;
+        padding: 1rem 1.25rem;
+        max-width: 100%;
+    }
 }
