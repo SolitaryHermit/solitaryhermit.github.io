@@ -271,7 +271,7 @@
                     </p>
 
                     <p>
-                        2. Next, let $\mathcal M$ be an arbitrary monomial generator of $I$. By Dickson's Lemma, it has only finitely many elements with respect to divisibility, and especially every monomial in it is divisible by some minimal element there. Then we may let $G\subseteq\mathcal M$ be the subset of all those minimal monomials, and claim that it is a minimal system of generators of $I$: 
+                        2. Next, let $\mathcal M$ be an arbitrary monomial generator of $I$. By <a href="#dickson">Dickson's Lemma</a>, it has only finitely many elements with respect to divisibility, and especially every monomial in it is divisible by some minimal one there. Then we may let $G\subseteq\mathcal M$ be the subset of all those minimal monomials, and claim that it is a minimal system of generators of $I$: 
                     </p>
 
                     <ul>
@@ -302,7 +302,7 @@
                 </div>
 
                 <!-- ACC -->
-                <div class="math-block corollary">
+                <div class="math-block corollary" id="mon-ideal-acc">
                     <div class="math-title">(ACC on Monomial Ideals)</div>
                     <p>
                         Every ascending chain of monomial ideals stabilizes.
@@ -311,15 +311,15 @@
                 <details class="proof">
                     <summary>Proof</summary>
                     <p>
-                        Let $(I_n)_{n\in\mathbb N}$ be an ascending chain of monomial ideals. Then for $\mathcal M:=\bigcup_{n\in\mathbb N}G(I_n)$, by Dickson's Lemma, it has a finite subset $\mathcal M_0$ consisting of all monomials there minimal with respect to divisibility. In this case, there exists $k\in\mathbb N$ such that 
+                        Let $(I_n)_{n\in\mathbb N}$ be an ascending chain of monomial ideals. Then for $\mathcal M:=\bigcup_{n\in\mathbb N}G(I_n)$, by <a href="#dickson">Dickson's Lemma</a>, it has a finite subset $\mathcal M_0$ consisting of all monomials there minimal with respect to divisibility. In this case, there exists $k\in\mathbb N$ such that 
                         $$\mathcal M_0\subseteq G(I_1)\cup\dots\cup G(I_k).$$ 
-                        We claim that $I_n=I_k$ for all $n\ge k$: Given any monomial $u\in G(I_n)$, it is divisible by some $v\in\mathcal M_0$, so $u\in\langle \mathcal M_0\rangle\subseteq I_1+\dots+I_k=I_k$. This shows that $I_n\subseteq I_k$, while the converse is trivial by hypothesis. The proof is complete. 
+                        We claim that $I_n=I_k$ for all $n\ge k$: Given any monomial $u\in G(I_n)$, by the minimality of $\mathcal M_0$, it is divisible by some $v\in\mathcal M_0$, so $u\in\langle \mathcal M_0\rangle\subseteq I_1+\dots+I_k=I_k$. This shows that $I_n\subseteq I_k$, while the converse is trivial by hypothesis. The proof is complete. 
                         <span class="qedsymbol">$\blacksquare$</span>
                     </p>
                 </details>
 
                 <!-- Operation -->
-                <div class="math-block theorem" id="mon-ideal-gen">
+                <div class="math-block theorem" id="mon-ideal-op">
                     <div class="math-title">(Operations of Monomial Ideals)</div>
                     <p>
                         Let $I,J\subseteq R[X_1,\dots,X_n]$ be monomial ideals.
@@ -348,7 +348,7 @@
                     </p>
 
                     <p>
-                        2. Given any polynomial $f\in I\cap J$, since $I,J$ are both monomial ideals, we have $\operatorname{Supp}(f)\subseteq I$ and $\operatorname{Supp}(f)\subseteq J$. Now $\operatorname{Supp}(f)\subseteq I\cap J$, so we may conclude that $I\cap J$ is also a monomial ideal. Moreover, for each $w\in\operatorname{Supp}(f)$, there exists $i=1,\dots,r$ and $j=1,\dots,s$ such that $u_i\mid w$ and $v_j\mid w$. In this case, we have $\operatorname{lcm}(u_i,v_j)\mid w$, so
+                        2. Given any polynomial $f\in I\cap J$, since $I,J$ are both monomial ideals, by Theorem <a href="#mon-ideal-free">1.1</a>, we have $\operatorname{Supp}(f)\subseteq I$ and $\operatorname{Supp}(f)\subseteq J$. Now $\operatorname{Supp}(f)\subseteq I\cap J$, so we may conclude that $I\cap J$ is also a monomial ideal. Moreover, for each $w\in\operatorname{Supp}(f)$, by Theorem <a href="#mon-ideal-gen">2.2</a>, there exists $i=1,\dots,r$ and $j=1,\dots,s$ such that $u_i\mid w$ and $v_j\mid w$. In this case, we have $\operatorname{lcm}(u_i,v_j)\mid w$, so
                         $$ w\in\langle \operatorname{lcm}(u_i,v_j)\mid i=1,\dots,r,~j=1,\dots,s \rangle.$$
                         Since $w\in\operatorname{Supp}(f)$ is arbitrary, it follows that $f\in\langle \operatorname{lcm}(u_i,v_j)\mid i=1,\dots,r,~j=1,\dots,s \rangle$ as well. Note that each $\operatorname{lcm}(u_i,v_j)$ also lies in $I\cap J$, hence
                         $$I\cap J=\langle \operatorname{lcm}(u_i,v_j)\mid i=1,\dots,r,~j=1,\dots,s \rangle.$$
@@ -362,13 +362,14 @@
 
                     <ul>
                         <li>
-                            Given any polynomial $f\in(I:v_j)$, we have $fv_j\in I$ whence $\operatorname{Supp}(fv_j)\subseteq I$. In this case, for each $u\in\operatorname{Supp}(f)$, we have $uv_j\in\operatorname{Supp}(fv_j)\subseteq I$, so $u\in(I:v_j)$ holds for sure. Therefore, the ideal $(I:v_j)$ is also a monomial ideal.
+                            Given any polynomial $f\in(I:v_j)$, we have $fv_j\in I$ whence $\operatorname{Supp}(fv_j)\subseteq I$. In this case, for each $u\in\operatorname{Supp}(f)$, we have $uv_j\in\operatorname{Supp}(fv_j)\subseteq I$, so $u\in(I:v_j)$ holds for sure. Therefore, by Theorem <a href="#mon-ideal-free">1.1</a>, the ideal $(I:v_j)$ is also a monomial ideal.
                         </li>
 
                         <li>
                             Furthermore, for each $i=1,\dots,r$, it is clear that
                             $$ \frac{u_i}{\gcd(u_i,v_j)}\cdot v_j=\frac{u_iv_j}{\gcd(u_i,v_j)}=\operatorname{lcm}(u_i,v_j)\in I, $$
-                            as it is certainly divisible by $u_i\in G(I)$. Thus, we have $u_i/\gcd(u_i,v_j)\in(I:v_j)$. Conversely, given each monomial $w\in(I:v_j)$, we have $v_jw\in I$ whence there exists $i=1,\dots,r$ such that $u_i\mid v_jw$. In this case, we see that $(u_i/\gcd(u_i,v_j))\mid w$. By Theorem <a href="#mon-ideal-gen">2.2</a>, we may conclude that $$(I:v_j)=\langle u_i/\gcd(u_i,v_j)\mid i=1,\dots,r \rangle. $$
+                            as it is certainly divisible by $u_i\in G(I)$. Thus, we have $u_i/\gcd(u_i,v_j)\in(I:v_j)$. Conversely, given each monomial $w\in(I:v_j)$, we have $v_jw\in I$ whence there exists $i=1,\dots,r$ such that $u_i\mid v_jw$. In this case, we see that $(u_i/\gcd(u_i,v_j))\mid w$. By Theorem <a href="#mon-ideal-gen">2.2</a>, we may conclude that 
+                            $$(I:v_j)=\langle u_i/\gcd(u_i,v_j)\mid i=1,\dots,r \rangle. $$
                             <span class="qedsymbol">$\blacksquare$</span>
                         </li>
                     </ul>
@@ -389,7 +390,7 @@
                 </div>
 
                 <!-- Generalized Identities -->
-                <div class="math-block theorem" id="mon-ideal-gen">
+                <div class="math-block theorem" id="mon-ideal-sum-int">
                     <div class="math-title">(Sum & Intersection of Monomial Ideals)</div>
                     <p>
                         Given any family $(I_\lambda)_{\lambda\in\Lambda}$ of monomial ideals in $R[X_1,\dots,X_n]$, both its intersection $\bigcap_{\lambda\in\Lambda}{I_\lambda}$ and sum $\sum_{\lambda\in\Lambda}{I_\lambda}$ are also monomial ideals. Furthermore, given another monomial ideal $J$, 
@@ -399,7 +400,7 @@
                 <details class="proof">
                     <summary>Proof</summary>
                     <p>
-                        1. Denote by $I:=\bigcap_{\lambda\in\Lambda}{I_\lambda}$. For each $f\in I$, we have $f\in I_\lambda$ for all $\lambda\in\Lambda$. Since $I_\lambda$ is a monomial ideal, we have $\operatorname{Supp}(f)\subseteq I_\lambda$. As a result, it follows that $\operatorname{Supp}(f)\subseteq I$, hence $I$ is also a monomial ideal. 
+                        1. Denote by $I:=\bigcap_{\lambda\in\Lambda}{I_\lambda}$. For each $f\in I$, we have $f\in I_\lambda$ for all $\lambda\in\Lambda$. Since $I_\lambda$ is a monomial ideal, by Theorem <a href="#mon-ideal-free">1.1</a>, we have $\operatorname{Supp}(f)\subseteq I_\lambda$. As a result, it follows that $\operatorname{Supp}(f)\subseteq I$, hence $I$ is also a monomial ideal by Theorem <a href="#mon-ideal-free">1.1</a> again. 
                     </p>
 
                     <ul>
@@ -408,7 +409,7 @@
                         </li>
 
                         <li>
-                            Conversely, let $u\in\bigcap_{\lambda\in\Lambda}{(I_\lambda+J)}$ be an arbitrary monomial. If $u\in J$, then $u\in I+J$ holds for sure. Assume that $u\notin J$ now. For each $\lambda\in\Lambda$, we now have $u\in I_\lambda+J$, while $I_\lambda+J$ is also a monomial ideal generated by the $G(I_\lambda)\cup G(J)$. Thus, $u$ is divisible by one element in $G(I_\lambda)\cup G(J)$. But note that $u\notin J$, so $u$ is essentially divisible by one element in $G(I_\lambda)$ instead, namely $u\in I_\lambda$. In this case, we can see that $u\in I\subseteq I+J$ as well.
+                            Conversely, let $u\in\bigcap_{\lambda\in\Lambda}{(I_\lambda+J)}$ be an arbitrary monomial. If $u\in J$, then $u\in I+J$ holds for sure. Assume that $u\notin J$ now. For each $\lambda\in\Lambda$, we now have $u\in I_\lambda+J$, while $I_\lambda+J$ is also a monomial ideal generated by the $G(I_\lambda)\cup G(J)$. Thus by Theorem <a href="#mon-ideal-gen">2.2</a>, $u$ is divisible by one element in $G(I_\lambda)\cup G(J)$. But note that $u\notin J$, so $u$ is essentially divisible by one element in $G(I_\lambda)$ instead, namely $u\in I_\lambda$. In this case, we can see that $u\in I\subseteq I+J$ as well.
                         </li>
                     </ul>
 
