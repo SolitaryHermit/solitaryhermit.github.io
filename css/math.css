@@ -8,15 +8,15 @@
     --lem-color: #d97706;  /* Amber */
     --thm-color: #6366f1;  /* Indigo */
     --cor-color: #059669;  /* Emerald */
-    --ex-color:  #0d9488;  /* Teal for Examples */
+    --ex-color:  #0d9488;  /* Teal */
     
-    /* Backgrounds & Neutral Accents */
+    /* Backgrounds & Neutrals */
     --proof-bg: #f8fafc;
     --tag-bg-color: #f3f4f6;
 }
 
 /* ==========================================================================
-   1. Math Page Navigation Override
+   1. Math Page Navigation Override & Header
    ========================================================================== */
 .math-page nav {
     border: none;
@@ -44,17 +44,25 @@ body.math-page {
 
 .math-page section {
     counter-increment: section-count;
-    /* Resets all environment counters at the start of each section */
     counter-reset: definition-count 0 lemma-count 0 theorem-count 0 example-count 0;
     margin-top: 2rem;
 }
 
 .math-page section h2::before {
-    content: "§" counter(section-count) ": ";
+    content: "Section " counter(section-count) ": ";
+}
+
+/* Suppress numbering on unnumbered sections (e.g., References) */
+.math-page section.unnumbered {
+    counter-increment: none;
+}
+
+.math-page section.unnumbered h2::before {
+    content: none !important;
 }
 
 /* ==========================================================================
-   3. Math Block Containers & Environment Logic
+   3. Math Block Containers & Environments
    ========================================================================== */
 .math-block {
     margin: 1.5rem 0;
@@ -64,6 +72,8 @@ body.math-page {
     border-left-width: 5px;
     border-radius: 4px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .math-block p:last-child {
@@ -100,11 +110,11 @@ body.math-page {
     content: "Lemma " counter(section-count) "." counter(lemma-count) " ";
 }
 
-/* Theorem & Corollary Hierarchy */
+/* Theorem & Corollary */
 .theorem {
     border-left-color: var(--thm-color);
     counter-increment: theorem-count;
-    counter-reset: corollary-count 0; /* Resets corollary counter per theorem */
+    counter-reset: corollary-count 0;
 }
 .theorem .math-title {
     color: var(--thm-color);
@@ -126,7 +136,7 @@ body.math-page {
     font-style: normal;
 }
 
-/* Example Block (Non-italic, Section-relative numbering) */
+/* Example */
 .example {
     border-left-color: var(--ex-color);
     counter-increment: example-count;
@@ -138,12 +148,28 @@ body.math-page {
     content: "Example " counter(section-count) "." counter(example-count) " ";
 }
 
+/* Target Highlighting via Cross-References */
+.math-block:target {
+    animation: target-highlight 1.5s ease-out;
+}
+
+@keyframes target-highlight {
+    0% {
+        background-color: #eff6ff;
+        box-shadow: 0 0 0 3px #93c5fd;
+    }
+    100% {
+        background-color: #ffffff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+}
+
 /* ==========================================================================
-   4. Foldable Proofs
+   4. Foldable Proofs & Draft Mode Toggle
    ========================================================================== */
 details.proof {
     margin-top: 0.75rem;
-    margin-bottom: 1.25rem; /* Adds space before following text */
+    margin-bottom: 1.25rem;
     background-color: var(--proof-bg);
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -152,17 +178,8 @@ details.proof {
     overflow-y: hidden;
 }
 
-/* Optional: if the proof is the very last element in the box, remove the extra gap */
 details.proof:last-child {
     margin-bottom: 0;
-}
-
-/* Ensure MathJax wrappers respect container boundaries */
-mjx-container[jax="CHTML"][display="true"] {
-    overflow-x: auto;
-    overflow-y: hidden;
-    max-width: 100%;
-    padding: 0.25rem 0;
 }
 
 details.proof summary {
@@ -177,13 +194,7 @@ details.proof summary:hover {
     color: var(--text-color);
 }
 
-details.proof[open] summary {
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.25rem;
-    border-bottom: 1px dashed var(--border-color);
-}
-
-/* Dynamic toggle label for proof summary */
+/* Dynamic expand/fold text substitution */
 details.proof summary::after {
     content: " (Click to expand)";
     font-weight: 400;
@@ -191,13 +202,32 @@ details.proof summary::after {
     color: var(--muted-color);
 }
 
+details.proof[open] summary {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
 details.proof[open] summary::after {
     content: " (Click to fold)";
+}
+
+/* Draft mode styling when <body class="math-page editing"> */
+body.editing details.proof summary::after {
+    content: " (Draft Mode: Open)" !important;
 }
 
 .qedsymbol {
     float: right;
     font-size: 1.1rem;
+}
+
+/* MathJax container responsiveness */
+mjx-container[jax="CHTML"][display="true"] {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 0.25rem 0;
 }
 
 /* ==========================================================================
@@ -247,7 +277,7 @@ details.proof li .MathJax_Display {
     margin: 0.4rem 0 !important;
 }
 
-/* Remove trailing margins from lists */
+/* Clean up trailing bottom list margins */
 .math-block ol:last-child,
 .math-block ul:last-child,
 details.proof ol:last-child,
@@ -258,7 +288,48 @@ details.proof li:last-child {
 }
 
 /* ==========================================================================
-   6. Blog Index Specifics
+   6. References / Bibliography Section
+   ========================================================================== */
+.references-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.reference-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.reference-key {
+    font-weight: 600;
+    color: var(--muted-color);
+    font-family: monospace;
+    flex-shrink: 0;
+}
+
+.reference-text {
+    color: var(--text-color);
+}
+
+.reference-title {
+    font-style: italic;
+}
+
+.reference-links a {
+    font-size: 0.85rem;
+    margin-left: 0.4rem;
+    color: var(--accent-color);
+}
+
+/* ==========================================================================
+   7. Blog Index Styles & Client-Side Pagination
    ========================================================================== */
 .post-list {
     list-style: none;
@@ -314,57 +385,6 @@ details.proof li:last-child {
     border-radius: 4px;
 }
 
-/* ==========================================================================
-   References / Bibliography Section
-   ========================================================================== */
-/* Suppress section auto-numbering and incrementing for unnumbered sections */
-.math-page section.unnumbered {
-    counter-increment: none;
-}
-
-.math-page section.unnumbered h2::before {
-    content: none !important;
-}
-
-.references-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-}
-
-.reference-item {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-.reference-key {
-    font-weight: 600;
-    color: var(--muted-color);
-    font-family: monospace;
-    flex-shrink: 0;
-}
-
-.reference-text {
-    color: var(--text-color);
-}
-
-.reference-title {
-    font-style: italic;
-}
-
-.reference-links a {
-    font-size: 0.85rem;
-    margin-left: 0.4rem;
-    color: var(--accent-color);
-}
-
-/* Pagination Controls */
 .pagination {
     display: flex;
     justify-content: center;
@@ -409,3 +429,62 @@ details.proof li:last-child {
     cursor: not-allowed;
 }
 
+/* ==========================================================================
+   8. Code Blocks & Computational Snippets (e.g., Macaulay2)
+   ========================================================================== */
+
+/* Outer container for labeled code blocks */
+.code-block {
+    position: relative;
+    margin: 1.5rem 0;
+    background-color: #1e293b; /* Dark slate background */
+    border: 1px solid #334155;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* Header bar with optional language label */
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    background-color: #0f172a;
+    border-bottom: 1px solid #334155;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Preformatted text container */
+.code-block pre {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    background: transparent;
+    line-height: 1.5;
+}
+
+/* Monospace text styling */
+.code-block code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875rem;
+    color: #e2e8f0;
+    tab-size: 4;
+    white-space: pre;
+}
+
+/* Optional inline code snippets within regular paragraphs */
+p > code,
+li > code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.875em;
+    background-color: var(--tag-bg-color, #f1f5f9);
+    color: #0f172a;
+    padding: 0.15em 0.35em;
+    border-radius: 3px;
+    border: 1px solid var(--border-color, #e2e8f0);
+}
