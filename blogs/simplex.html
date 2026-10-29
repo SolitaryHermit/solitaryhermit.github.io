@@ -298,34 +298,41 @@
                         Enter facets for $\Delta$ (e.g., <code>123, 34, 45</code> or <code>12, 23, 31</code>) or select a preset. Toggle the view mode to inspect the Alexander dual $\Delta^*$.
                     </p>
 
-                    <div class="widget-controls">
-                        <label for="sc-facets-input"><strong>Facets of $\Delta$:</strong></label>
-                        <input type="text" id="sc-facets-input" value="12, 23, 31" style="min-width: 180px;">
-                        <button id="sc-update-btn">Update</button>
+                    <!-- Two-Row Structured Controls -->
+                    <div class="widget-controls-stack">
+                        <!-- Row 1: Primary Inputs & Mode Toggle -->
+                        <div class="widget-controls-row">
+                            <label for="sc-facets-input"><strong>Facets of $\Delta$:</strong></label>
+                            <input type="text" id="sc-facets-input" value="12, 23, 31" style="width: 170px;">
+                            <button id="sc-update-btn">Update</button>
 
-                        <!-- View Toggle -->
-                        <div style="display: inline-flex; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; margin-left: 0.5rem;">
-                            <button id="sc-view-orig" class="sc-toggle-btn active" style="border-radius: 0;">Primal $\Delta$</button>
-                            <button id="sc-view-dual" class="sc-toggle-btn" style="border-radius: 0; background: #f1f5f9; color: var(--text-color);">Dual $\Delta^\vee$</button>
+                            <div class="sc-toggle-group">
+                                <button id="sc-view-orig" class="sc-toggle-btn active">Primal $\Delta$</button>
+                                <button id="sc-view-dual" class="sc-toggle-btn">Dual $\Delta^*$</button>
+                            </div>
                         </div>
 
-                        <span style="font-size: 0.85rem; color: var(--muted-color); margin-left: 0.5rem;">Presets:</span>
-                        <button class="sc-preset-btn" data-preset="12, 23, 31" style="background:#475569;">Boundary $\partial\Delta_2$ (Empty Triangle)</button>
-                        <button class="sc-preset-btn" data-preset="123, 34, 45" style="background:#475569;">Triangle + Path</button>
-                        <button class="sc-preset-btn" data-preset="12, 34" style="background:#475569;">Disjoint Edges</button>
+                        <!-- Row 2: Presets aligned cleanly on their own line -->
+                        <div class="widget-controls-row presets-row">
+                            <span class="presets-label">Presets:</span>
+                            <button class="sc-preset-btn" data-preset="12, 23, 31">Boundary $\partial\Delta_2$ (Empty Triangle)</button>
+                            <button class="sc-preset-btn" data-preset="123, 34, 45">Triangle + Path</button>
+                            <button class="sc-preset-btn" data-preset="12, 34">Disjoint Edges</button>
+                        </div>
                     </div>
 
                     <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; margin-top: 1rem;">
                         <!-- Canvas Realization -->
                         <div class="widget-canvas-container" style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;">
                             <canvas id="sc-canvas" width="340" height="340"></canvas>
-                            <span id="sc-active-label" style="margin-top: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--def-color);">Viewing: Primal Complex $\Delta$</span>
+                            <span id="sc-active-label" style="margin-top: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--def-color);">Viewing: Primal Complex Δ</span>
                         </div>
 
                         <!-- Invariants Panel -->
                         <div class="sc-data-panel" style="flex: 1; min-width: 270px; display: flex; flex-direction: column; gap: 0.75rem;">
+                            <!-- Clean Header without redundant overlapping text -->
                             <div class="reducer-result-box">
-                                <span class="reducer-label">Alexander Dual Facets $\operatorname{Facets}(\Delta^\vee)$:</span>
+                                <span class="reducer-label">Alexander Dual Facets ($\Delta^*$):</span>
                                 <div id="sc-dual-facets-display" class="generator-badges"></div>
                             </div>
 
@@ -351,7 +358,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="math-block definition">
                     <div class="math-title">(Alexander Dual)</div>

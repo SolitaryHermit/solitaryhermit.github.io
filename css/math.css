@@ -713,6 +713,21 @@ li > code {
     opacity: 0.9;
 }
 
+/* Stacked controls layout */
+.widget-controls-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.widget-controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+}
+
 .widget-canvas-container {
     display: flex;
     justify-content: center;
@@ -845,4 +860,51 @@ li > code {
 .sc-toggle-btn.active {
     background-color: var(--def-color, #0284c7) !important;
     color: #ffffff !important;
+}
+
+/* Preset buttons styling */
+.presets-row {
+    align-items: center;
+}
+
+.presets-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted-color);
+    margin-right: 0.2rem;
+}
+
+.sc-preset-btn {
+    padding: 0.35rem 0.65rem;
+    background-color: #334155 !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.sc-preset-btn:hover {
+    opacity: 0.9;
+}
+
+/* Toggle group for Primal/Dual */
+.sc-toggle-group {
+    display: inline-flex;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Fix overlapping math font inside card labels */
+.reducer-label {
+    text-transform: none !important; /* Prevents collision with MathJax characters */
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    color: var(--muted-color);
+    display: block;
+    margin-bottom: 0.4rem;
 }
