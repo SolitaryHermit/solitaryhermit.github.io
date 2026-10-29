@@ -655,3 +655,178 @@ li > code {
         max-width: 100%;
     }
 }
+
+/* ==========================================================================
+   Interactive Math Widgets
+   ========================================================================== */
+.interactive-widget {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.widget-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--def-color, #0284c7);
+}
+
+.widget-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.widget-controls input[type="text"] {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.widget-controls button {
+    padding: 0.4rem 0.8rem;
+    background-color: var(--def-color, #0284c7);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.widget-controls button:hover {
+    opacity: 0.9;
+}
+
+.widget-canvas-container {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.widget-legend {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+    color: var(--muted-color);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+/* ==========================================================================
+   Minimal Generator Reducer Styles
+   ========================================================================== */
+.reducer-output-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.reducer-result-box {
+    background-color: var(--proof-bg, #f8fafc);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+}
+
+.reducer-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted-color);
+    margin-bottom: 0.5rem;
+}
+
+.generator-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 28px;
+    align-items: center;
+}
+
+.gen-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.6rem;
+    background-color: #ffffff;
+    border: 1px solid var(--def-color, #0284c7);
+    color: var(--def-color, #0284c7);
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.gen-badge.eliminated {
+    border-color: #cbd5e1;
+    color: #94a3b8;
+    background-color: #f1f5f9;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.reducer-log-box {
+    border: 1px dashed var(--border-color);
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+    max-height: 220px;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.reducer-log-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+.reducer-log-list li {
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+}
+
+.reducer-log-list li.elim-log {
+    background-color: #fef2f2;
+    color: #b91c1c;
+}
+
+.reducer-log-list li.keep-log {
+    background-color: #f0fdf4;
+    color: #15803d;
+}
