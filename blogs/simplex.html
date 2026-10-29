@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simplical Complexes</title>
+    <title>Simplicial Complexes</title>
 
     <!-- Linking the new combined CSS file -->
     <link rel="stylesheet" href="../css/global.css">
@@ -22,6 +22,7 @@
 
     <!-- Script handling dynamic references and editing uncollapse -->
     <script src="../js/math-notes.js" defer></script>
+    <script src="../js/simplicial-explorer.js" defer></script>
 </head>
 
 <!-- Back-to-top Button -->
@@ -34,8 +35,8 @@
         <nav class="back-nav"><a href="../posts.html">← Back to List of Posts</a></nav>
         
         <header>
-            <h1>A Survey on Simplical Complexes</h1>
-            <p class="math-subtitle">Updated: Sep 7, 2026</p>
+            <h1>A Survey on Simplicial Complexes</h1>
+            <!-- <p class="math-subtitle">Updated: Sep 7, 2026</p> -->
         </header>
 
         <!-- Dynamic TOC placeholder: choose one class variant -->
@@ -50,17 +51,17 @@
             </p>
 
             <p>
-                Furthermore, given each positive integer $n$, we may denote by $[n]:=\{1,\dots,n\}$ and $2^{[n]}:=\mathcal P([n])$ the power set of $[n]$, i.e., the collection of all subsets of $[n]$. 
+                Furthermore, given each positive integer $n$, we may denote by $[n]:=\{1,\dots,n\}$, and for every (finite) set $X$, we put $2^X:=\mathcal P(X)$ the power set of $X$, i.e., the collection of all subsets of $X$. 
             </p>
 
             <!-- SECTION 1 -->
             <section id="sim-comp">
-                <h2>Simplical Complexes</h2>
+                <h2>Simplicial Complexes</h2>
 
                 <div class="math-block definition">
-                    <div class="math-title">(Simplical Complexes)</div>
+                    <div class="math-title">(Simplicial Complexes)</div>
                     <p>
-                        A <strong>simplical complex</strong> on the vertex set $[n]$ is a collection $\Delta\subseteq 2^{[n]}$ that is <em>downward-closed</em>, namely for every $F,G\subseteq[n]$, 
+                        Let $X$ be a finite set. A <strong>simplicial complex</strong> on the <strong>vertex set</strong> $X$ is a collection $\Delta\subseteq 2^X$ that is <em>downward-closed</em>, namely for every $F,G\subseteq X$, 
                         $$ G\subseteq F~\text{and}~F\in\Delta\implies G\in\Delta $$
                     </p>
 
@@ -70,92 +71,108 @@
                         </li>
 
                         <li>
-                            Dually, every subset of $[n]$ not contained in $\Delta$ is called a <strong>non-face</strong>, and a <strong>minimal non-face</strong> if also minimal among all non-faces. 
+                            Dually, every subset of $X$ not contained in $\Delta$ is called a <strong>non-face</strong>, and a <strong>minimal non-face</strong> if also minimal among all non-faces. 
                         </li>
 
                         <li>
                             For each face $F\in\Delta$, its <strong>dimension</strong> is defined as 
                             $$ \dim(F):=|F|-1. $$ 
-                            Faces of dimensions $0$ and $1$ are called <strong>vertices</strong> and <strong>edges</strong>, respectively. Besides, we say that $\Delta$ is <strong>pure</strong> if all of its facets are of the same dimension. 
+                            Faces of dimensions $0$ and $1$ are called <strong>vertices</strong> and <strong>edges</strong>, respectively, and $\Delta$ is  said to be <strong>pure</strong> if all of its facets are of the same dimension. 
                         </li>
 
                         <li>
                             In general, the <strong>dimension</strong> of $\Delta$ is 
-                            $$ \dim(\Delta):=\max_{F\in\Delta}\dim(F)=\max_{F\in\Delta}(|F|-1). $$
+                            $$ \dim(\Delta):=\max_{F\in\Delta}\dim(F)=\max_{F\in\Delta}|F|-1. $$
                         </li>
                     </ul>
                 </div>
 
                 <p>
-                    Because $[n]$ has only $2^n$ many subsets, <em>every simplical complex on it is necessarily finite</em> as well. Furthermore, <em>the dimension of faces is monotone</em>, i.e., for every faces $F,G\in\Delta$, 
+                    Because $|2^X|=2^{|X|}<\infty$, <em>every simplicial complex on $X$ is necessarily finite</em> as well. Furthermore, <em>the dimension of faces is monotone</em>, i.e., for every faces $F,G\in\Delta$, 
                     $$ F\subseteq G\implies\dim(F)\le\dim(G). $$
                     Thus, we essentially have 
-                    $$ \dim(\Delta)=\max_{F~\text{facet}}\dim(F)=\max_{F~\text{facet}}(|F|-1). $$
+                    $$ \dim(\Delta)=\max_{F~\text{facet}}\dim(F)=\max_{F~\text{facet}}|F|-1. $$
                 </p>
 
-                <!-- Example of Simplical Complexes -->
+                <!-- Example of Simplicial Complexes -->
                 <div class="math-block example">
-                    <div class="math-title">(Trivial Examples of Simplical Complexes)</div>
+                    <div class="math-title">(Trivial Examples of Simplicial Complexes)</div>
+                    Suppose that $|X|=n$. 
                     <ul>
                         <li>
                             The complex $\emptyset$ is called the <strong>void complex</strong> (of dimension $-\infty$). 
                         </li>
                         
                         <li>
-                            Moreover, <em>if $\Delta\ne\emptyset$ is a simplical complex, then we necessarily have $\emptyset\in\Delta$, namely $\emptyset$ is always a face of $\Delta$.</em> 
+                            Moreover, <em>if $\Delta\ne\emptyset$ is a simplicial complex, then we necessarily have $\emptyset\in\Delta$, namely $\emptyset$ is always a face of $\Delta$.</em> 
                             The simplest nonempty complex $\{\emptyset\}$ is called the <strong>irrelevant complex</strong>, which is of dimension $-1$. 
                         </li>
 
                         <li>
-                            The complex $2^{[n]}=\mathcal P([n])$ is also called the <strong>full complex</strong>, whose dimension is precisely $n-1$. 
+                            The complex $2^X=\mathcal P(X)$ is also called the <strong>full complex</strong>, whose dimension is precisely $n-1$. 
                         </li>
 
                         <li>
-                            In addition, the <strong>boundary</strong> is defined as $\partial:=2^{[n]}\setminus\{[n]\}$, which is pure and also of dimension $n-2$. 
+                            In addition, the <strong>boundary</strong> is defined as $\partial:=2^X\setminus\{X\}$, which is pure and also of dimension $n-2$. 
                         </li>
                     </ul>
                 </div>
 
-                <!-- Example of Simplical Complexes -->
+                <p>
+                    One can note that <em>a face $F$ is a facet iff every of its superset is a non-face</em>, and oppositely, <em>a non-face $G$ is minimal iff every of its proper subset is a face in $\Delta$</em>. 
+                </p>
+
+                <!-- Example of Simplicial Complexes 2-->
                 <div class="math-block example" id="sc-graph">
-                    <div class="math-title">(Graphs as Simplical Complexes)</div>
+                    <div class="math-title">(Graphs as Simplicial Complexes)</div>
                     <p>
-                        Every simple unordered graph $G$ on $[n]$ with edge set $E$ can be essentially regarded as a simplical complex: 
-                        $$ \Delta(G):=\{\emptyset\}\cup\{\{i\}\mid i\in[n]\}\cup\{\{i,j\}\mid ij\in E\}. $$
-                        The first two sets are fixed, while the last is essentially the edge set $E$. Clearly, 
+                        Every simple unordered graph $G=(V,E)$ can be essentially regarded as a simplicial complex on the vertex set $V$: 
+                        $$ \Delta(G):=\{\emptyset\}\cup\{\{v\}\mid v\in V\}\cup E. $$
+                        Clearly, the facets in $\Delta(G)$ are precisely the edges and 
                         $$ \dim \Delta(G)=\begin{cases} 0, & \text{if}~E=\emptyset; \\
                         1, & \text{otherwise}. \end{cases} $$
-                        In fact, every simplical complex $\Delta$ with dimension at most $1$ can be regarded as a graph. This explains why we call faces of dimensions $0$ and $1$ are called vertices and edges, respectively. 
+                        In fact, every simplicial complex $\Delta$ with dimension at most $1$ can be regarded as a graph. This explains why we call faces of dimensions $0$ and $1$ are called vertices and edges, respectively. 
                     </p>
                     <p>
-                        Moreover, <em>the minimal non-faces of $\Delta(G)$ are precisely the non-edges, namely $\{i,j\}\subseteq[n]$ where $i,j$ are not adjacent in $G$, and also the triangles in $G$</em>: 
+                        Moreover, <em>the minimal non-faces of $\Delta(G)$ are precisely the non-edges, namely $\{u,v\}\subseteq V$ where $u,v$ are not adjacent in $G$, and also the triangles in $G$</em>: 
                     </p>
                     <ul>
                         <li>
-                            Every singleton in $[n]$ is contained in $\Delta(G)$, hence always a face. 
+                            Every singleton in $V$ is contained in $\Delta(G)$, hence always a face. 
                         </li>
 
                         <li>
-                            A non-face for $\Delta(G)$ has two elements iff these two elements are not adjacent in $G$. Since every singleton in $[n]$ is a face, each non-face of size two is necessarily minimal. 
+                            A non-face for $\Delta(G)$ has two elements iff these two elements are not adjacent in $G$. Since every singleton in $V$ is a face, each non-face of size two is necessarily minimal. 
                         </li>
 
                         <li>
-                            Note that every subset $E\subseteq\{1,\dots,n\}$ of at least three elements is always a non-face for $\Delta(G)$. It is minimal iff all of its subsets are faces in $G$, which forces it to be of size $3$ and all of its pairs to be faces. Therefore, minimal non-faces of size of size at least $3$ are precisely the triangles in $G$. 
+                            Note that every subset $S\subseteq V$ of at least three elements is always a non-face for $\Delta(G)$. It is minimal iff all of its subsets are faces in $G$, which forces it to be of size $3$ and all of its pairs to be faces. Therefore, minimal non-faces of size of size at least $3$ are precisely the triangles in $G$. 
                         </li>
                     </ul>
                 </div>
 
-                <!-- Union & Intersection of Simplical complexes -->
-                <div class="math-block lemma" id="sc-ui">
-                    <div class="math-title">(Union & Intersection of Simplical Complexes)</div>
+                <!-- Example of Simplicial Complexes 3-->
+                <div class="math-block example" id="sc-chain">
+                    <div class="math-title">(Order Complex of Posets)</div>
                     <p>
-                        Given any family $(\Delta_i)_{i\in\Lambda}$ of simplical complexes on $[n]$, their intersection $\bigcap_{i\in\Lambda}\Delta_i$ and union $\bigcup_{i\in\Lambda}\Delta_i$ are also simplical complexes. 
+                        Let $(P,\le)$ be a finite partially ordered set (poset). All of its chains also form a simplicial complex as well: In fact, we may note that each chain in $(P,\le)$ is a linearly ordered subset, so every of its subset is necessarily linearly ordered as well, namely also a chain in $(P,\le)$. 
+                    </p>
+                    <p>
+                        Therefore, the collection of all chains in $(P,\le)$  is called its associated <strong>order complex</strong>, denoted by $\Delta(P)$. Clearly, the facets of $\Delta(P)$ are essentially the maximal chains in $(P,\le)$. 
+                    </p>
+                </div>
+
+                <!-- Union & Intersection of Simplicial complexes -->
+                <div class="math-block lemma" id="sc-ui">
+                    <div class="math-title">(Union & Intersection of Simplicial Complexes)</div>
+                    <p>
+                        Given any family $(\Delta_i)_{i\in\Lambda}$ of simplicial complexes on $X$, their intersection $\bigcap_{i\in\Lambda}\Delta_i$ and union $\bigcup_{i\in\Lambda}\Delta_i$ are also simplicial complexes. 
                     </p>
                 </div>
                 <details class="proof">
                     <summary>Proof</summary>
                     <p>
-                        Denote by $\Delta:=\bigcap_{i\in\Lambda}\Delta_i$ and $\Delta':=\bigcup_{i\in\Lambda}\Delta_i$, both of which are clearly collection of subsets of $[n]$ as well. Now let $F,G\subseteq[n]$ be arbitrary with $G\subseteq F$. 
+                        Denote by $\Delta:=\bigcap_{i\in\Lambda}\Delta_i$ and $\Delta':=\bigcup_{i\in\Lambda}\Delta_i$, both of which are clearly collection of subsets of $X$ as well. Now let $F,G\subseteq X$ be arbitrary with $G\subseteq F$. 
                     </p>
                     <ul>
                         <li>
@@ -167,32 +184,32 @@
                         </li>
                     </ul>
                     <p>
-                        Therefore, we may conclude that both $\Delta$ and $\Delta'$ are simplical complexes on $[n]$, as desired. 
+                        Therefore, we may conclude that both $\Delta$ and $\Delta'$ are simplicial complexes on $X$, as desired. 
                         <span class="qedsymbol">$\blacksquare$</span>
                     </p>
                 </details>
 
-                As we shall see then, every simplical complex is uniquely determined by its facets: 
+                As we shall see then, every simplicial complex is uniquely determined by its facets: 
 
                 <!-- Generated Simplexes -->
                 <div class="math-block theorem" id="sc-facet">
-                    <div class="math-title">(Simplical Complexes vs Facets)</div>
+                    <div class="math-title">(Simplicial Complexes vs Facets)</div>
                     <ol>
                         <li>
-                            Given any simplical complex $\Delta$ on $[n]$, if $F_1,\dots,F_m$ are its facets, then $\Delta$ precisely consists of all subsets of them, namely 
-                            $$ \Delta=\{G\subseteq[n] \mid \exists i=1,\dots,m:G\subseteq F_i \}. $$
+                            Given any simplicial complex $\Delta$ on $X$, if $F_1,\dots,F_m$ are its facets, then $\Delta$ precisely consists of all subsets of them, namely 
+                            $$ \Delta=\{G\subseteq X \mid \exists i=1,\dots,m:G\subseteq F_i \}. $$
                         </li>
 
                         <li>
-                            Conversely, for every $F_1,\dots,F_m\subseteq[n]$, there is a unique smallest simplical complex $\Delta$ on $[n]$ containing all of them, which is precisely 
-                            $$ \Delta=\{G\subseteq[n] \mid \exists i=1,\dots,m:G\subseteq F_i \}. $$
+                            Conversely, for every $F_1,\dots,F_m\subseteq X$, there is a unique smallest simplicial complex $\Delta$ on $X$ containing all of them, which is precisely 
+                            $$ \Delta=\{G\subseteq X \mid \exists i=1,\dots,m:G\subseteq F_i \}. $$
                         </li>
                         <ul>
                             <li>
                                 The maximal members of $F_1,\dots,F_m$ are precisely the facets of $\Delta$.  
                             </li>
                             <li>
-                                All the faces $F_1,\dots,F_m$ are facets of $\Delta$ iff they form an anti-chain in the lattice $(2^{[n]},\subseteq)$, namely no two of them are comparible. 
+                                All the faces $F_1,\dots,F_m$ are facets of $\Delta$ iff they form an anti-chain in the lattice $(2^X,\subseteq)$, namely no two of them are comparible. 
                             </li>
                         </ul>
                     </ol>
@@ -200,7 +217,7 @@
                 <details class="proof">
                     <summary>Proof</summary>
                     <p>
-                        1. Let $\Delta$ be a simplical complex on $[n]$ with facets $F_1,\dots,F_m$. Since $\Delta$ is downward-closed, all subsets of $F_1,\dots,F_m$ necessarily belongs to it. Conversely, fix an arbitrary face $F\in\Delta$. Consider the set 
+                        1. Let $\Delta$ be a simplicial complex on $X$ with facets $F_1,\dots,F_m$. Since $\Delta$ is downward-closed, all subsets of $F_1,\dots,F_m$ necessarily belongs to it. Conversely, fix an arbitrary face $F\in\Delta$. Consider the set 
                         $$ \{G\in\Delta\mid G\supseteq F\} $$
                         of all faces in $\Delta$ containing $F$, which is nonempty as $F$ belongs to it. Furthermore, because $\Delta$ itself is finite, the above set must be finite as well. Consequently, one can find a maximal member $G_0$ there. 
                     </p>
@@ -208,24 +225,24 @@
                         We claim that $G_0$ is also a facet in $\Delta$, namely maximal: Given any face $H\in\Delta$ containing $G_0$, we have $F\subseteq G_0\subseteq H$, so $H$ must belong to the set constructed above. By the maximality of $G_0$ there, the equality $G_0=H$ is essentially attained. Therefore, we have $G_0=F_i$ for some $i=1,\dots,m$, and especially $F$ is a subset of $F_i=G_0$, as desired. 
                     </p>
                     <p>
-                        2. Fix arbitrary subsets $F_1,\dots,F_m\subseteq[n]$. Here one may consider the intersection $\Delta$ of all simplical complexes on $[n]$ containing them, which is also a simplical complex by Lemma <a href="sc-ui">2.1</a>. Note that $\Delta$ is a subset of any simplical complex on $[n]$ containing $F_1,\dots,F_m$, and in particular, itself is a simplical complex containing these subset, hence essentially the smallest one there. 
+                        2. Fix arbitrary subsets $F_1,\dots,F_m\subseteq X$. Here one may consider the intersection $\Delta$ of all simplicial complexes on $X$ containing them, which is also a simplicial complex by Lemma <a href="sc-ui">2.1</a>. Note that $\Delta$ is a subset of any simplicial complex on $X$ containing $F_1,\dots,F_m$, and in particular, itself is a simplicial complex containing these subset, hence essentially the smallest one there. 
                     </p>
                     <p>
                         Now we turn to the structure of $\Delta$: By the downward-closedness of $\Delta$, we necessarily have 
-                        $$ \Delta':=\{G\subseteq[n] \mid \exists i=1,\dots,m:G\subseteq F_i \}\subseteq\Delta. $$
-                        Conversely, it is ready to be seen that $F_1,\dots,F_m$ all belong to the set $\Delta'$. The collection $\Delta'$ is also a simplical complex on $[n]$: 
+                        $$ \Delta':=\{G\subseteq X \mid \exists i=1,\dots,m:G\subseteq F_i \}\subseteq\Delta. $$
+                        Conversely, it is ready to be seen that $F_1,\dots,F_m$ all belong to the set $\Delta'$. The collection $\Delta'$ is also a simplicial complex on $X$: 
                     </p>
                     <ul>
                         <li>
-                            Each member in $\Delta'$ is a subset of some $F_i$, hence also a subset of $[n]$. 
+                            Each member in $\Delta'$ is a subset of some $F_i$, hence also a subset of $X$. 
                         </li>
 
                         <li>
-                            Let $F,G\subseteq[n]$ with $F\subseteq G$. If $G\in\Delta'$, then $G\subseteq F_i$ for some $i=1,\dots,m$. Now $F\subseteq F_i$ holds as well, hence $F\in\Delta'$. 
+                            Let $F,G\subseteq X$ with $F\subseteq G$. If $G\in\Delta'$, then $G\subseteq F_i$ for some $i=1,\dots,m$. Now $F\subseteq F_i$ holds as well, hence $F\in\Delta'$. 
                         </li>
                     </ul>
                     <p>
-                        Therefore, $\Delta'$ is a simplical complex on $[n]$ containing $F_1,\dots,F_m$, so the inclusion $\Delta\subseteq\Delta'$ is also trivial. We now precisely have $\Delta=\Delta'$ in this case. What remains is to study the facets of $\Delta$: 
+                        Therefore, $\Delta'$ is a simplicial complex on $X$ containing $F_1,\dots,F_m$, so the inclusion $\Delta\subseteq\Delta'$ is also trivial. We now precisely have $\Delta=\Delta'$ in this case. What remains is to study the facets of $\Delta$: 
                     </p>
                     <ul>
                         <li>
@@ -236,63 +253,135 @@
                         </li>
                     </ul>
                     <p>
-                        Therefore, all faces $F_1,\dots,F_m$ are facets of $\Delta$ iff each of them is maximal among this subfamily, which holds iff no two of them are comparible, i.e., they form an anti-chain in $[n]$ under inclusion, as desired. 
+                        Therefore, all faces $F_1,\dots,F_m$ are facets of $\Delta$ iff each of them is maximal among this subfamily, which holds iff no two of them are comparible, i.e., they form an anti-chain in $X$ under inclusion, as desired. 
                         <span class="qedsymbol">$\blacksquare$</span>
                     </p>
                 </details>
 
                 <div class="math-block definition">
-                    <div class="math-title">(Generated Simplical Complexes)</div>
+                    <div class="math-title">(Generated Simplicial Complexes)</div>
                     <p>
-                        For every $F_1,\dots,F_m\subseteq[n]$, the unique smallest simplical complex on $[n]$ containing all of them is called the <strong>simplical complex generated by $F_1,\dots,F_m$</strong>, denoted by $\langle F_1,\dots,F_m \rangle$. In particular, every simplical complex generated by a single subset of $[n]$ is called a <strong>simplex</strong>. 
+                        For every $F_1,\dots,F_m\subseteq X$, the unique smallest simplicial complex on $X$ containing all of them is called the <strong>simplicial complex generated by $F_1,\dots,F_m$</strong>, denoted by $\langle F_1,\dots,F_m \rangle$. In particular, every simplicial complex generated by a single subset of $X$ is called a <strong>simplex</strong>. 
                     </p>
                 </div>
 
-                <!-- Simplical Complex vs. antichain -->
+                <!-- Simplicial Complex vs. antichain -->
                 <div class="math-block corollary">
-                    <div class="math-title">(Simplical Complexes vs Anti-chains)</div>
+                    <div class="math-title">(Simplicial Complexes vs Anti-chains)</div>
                     <p>
                         The assignments 
                         $$ \Delta\mapsto\{F\in\Delta\mid F~\text{is a facet}\} \quad\text{and}\quad \mathcal A\mapsto\langle \mathcal A \rangle. $$
-                        are precisely mutually inverse bijections between simplical complexes on $[n]$ and anti-chains of $(2^{[n]},\subseteq)$. 
+                        are precisely mutually inverse bijections between simplicial complexes on $X$ and anti-chains of $(2^X,\subseteq)$. 
                     </p>
                 </div>
                 <details class="proof">
                     <summary>Proof</summary>
                     <p>
-                        Given any simplical complex $\Delta$ on $[n]$, its facets are clearly mutually incomparable, hence form an anti-chain $\mathcal A$ in $2^{[n]}$ as well. By Part 1 of Theorem <a href="#sc-facet">2.1</a>, we certainly have $\Delta=\langle \mathcal A \rangle$ here. 
+                        Given any simplicial complex $\Delta$ on $X$, its facets are clearly mutually incomparable, hence form an anti-chain $\mathcal A$ in $2^X$ as well. By Part 1 of Theorem <a href="#sc-facet">2.1</a>, we certainly have $\Delta=\langle \mathcal A \rangle$ here. 
                     </p>
                     <p>
-                        Conversely, given any anti-chain $\mathcal A$ in $2^{[n]}$, by Part 2, itself is precisely the collection of all facets in the generated simplical complex $\langle \mathcal A \rangle$. The proof is complete. 
+                        Conversely, given any anti-chain $\mathcal A$ in $2^X$, by Part 2, itself is precisely the collection of all facets in the generated simplicial complex $\langle \mathcal A \rangle$. The proof is complete. 
                         <span class="qedsymbol">$\blacksquare$</span>
                     </p>
                 </details>
 
+                <p>
+                    The interactive widget below builds $\Delta$ from its maximal faces (facets), renders its 2-skeleton geometrically, and evaluates its intrinsic combinatorial invariants—including pureness, the complete face vector $f(\Delta)$, and the reduced Euler characteristic $\tilde{\chi}(\Delta) = \sum_{i \ge -1} (-1)^i f_i$ (for these concepts not defined so far, please refer to the following sections of this post).
+                </p>
+
+                <div class="interactive-widget" id="simplicial-explorer-app">
+                    <div class="widget-header">
+                        <span class="widget-title">Interactive: Simplicial Complex &amp; Alexander Dual</span>
+                    </div>
+
+                    <p style="font-size: 0.9rem; color: var(--muted-color); margin-top: 0; margin-bottom: 0.75rem;">
+                        Enter facets for $\Delta$ (e.g., <code>123, 34, 45</code> or <code>12, 23, 31</code>) or select a preset. Toggle the view mode to inspect the Alexander dual $\Delta^*$.
+                    </p>
+
+                    <div class="widget-controls">
+                        <label for="sc-facets-input"><strong>Facets of $\Delta$:</strong></label>
+                        <input type="text" id="sc-facets-input" value="12, 23, 31" style="min-width: 180px;">
+                        <button id="sc-update-btn">Update</button>
+
+                        <!-- View Toggle -->
+                        <div style="display: inline-flex; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; margin-left: 0.5rem;">
+                            <button id="sc-view-orig" class="sc-toggle-btn active" style="border-radius: 0;">Primal $\Delta$</button>
+                            <button id="sc-view-dual" class="sc-toggle-btn" style="border-radius: 0; background: #f1f5f9; color: var(--text-color);">Dual $\Delta^\vee$</button>
+                        </div>
+
+                        <span style="font-size: 0.85rem; color: var(--muted-color); margin-left: 0.5rem;">Presets:</span>
+                        <button class="sc-preset-btn" data-preset="12, 23, 31" style="background:#475569;">Boundary $\partial\Delta_2$ (Empty Triangle)</button>
+                        <button class="sc-preset-btn" data-preset="123, 34, 45" style="background:#475569;">Triangle + Path</button>
+                        <button class="sc-preset-btn" data-preset="12, 34" style="background:#475569;">Disjoint Edges</button>
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; margin-top: 1rem;">
+                        <!-- Canvas Realization -->
+                        <div class="widget-canvas-container" style="flex: 0 0 auto; display: flex; flex-direction: column; align-items: center;">
+                            <canvas id="sc-canvas" width="340" height="340"></canvas>
+                            <span id="sc-active-label" style="margin-top: 0.5rem; font-size: 0.85rem; font-weight: 600; color: var(--def-color);">Viewing: Primal Complex $\Delta$</span>
+                        </div>
+
+                        <!-- Invariants Panel -->
+                        <div class="sc-data-panel" style="flex: 1; min-width: 270px; display: flex; flex-direction: column; gap: 0.75rem;">
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Alexander Dual Facets $\operatorname{Facets}(\Delta^\vee)$:</span>
+                                <div id="sc-dual-facets-display" class="generator-badges"></div>
+                            </div>
+
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Dimension &amp; Pureness:</span>
+                                <div id="sc-dim-display" style="font-size: 0.95rem; font-weight: 600; color: #1e293b;"></div>
+                            </div>
+
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Face Vector ($f$-vector):</span>
+                                <div id="sc-fvec-display" style="font-family: monospace; font-size: 0.95rem; color: var(--def-color); font-weight: 600;"></div>
+                            </div>
+
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Euler Characteristic:</span>
+                                <div id="sc-euler-display" style="font-family: monospace; font-size: 0.9rem; color: #334155;"></div>
+                            </div>
+
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Connected Components ($H_0$):</span>
+                                <div id="sc-components-display" style="font-size: 0.9rem; color: var(--muted-color);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="math-block definition">
                     <div class="math-title">(Alexander Dual)</div>
                     <p>
-                        Let $\Delta$ be a simplical complex on $[n]$. Its <strong>Alexander dual</strong> is defined the following collection of subsets of $[n]$: 
-                        $$ \Delta^\vee:=\{F^c\mid F\subseteq[n]~\text{and}~F\notin\Delta\}, $$
-                        where $F^c:=[n]\setminus F$ is the complement of $F$ in $[n]$. 
+                        Let $\Delta$ be a simplicial complex on $X$. Its <strong>Alexander dual</strong> is defined the following collection of subsets of $X$: 
+                        $$ \Delta^\vee:=\{F^c\mid F\subseteq X~\text{and}~F\notin\Delta\}, $$
+                        where $F^c:=X\setminus F$ is the complement of $F$ in $X$. 
                     </p>
                 </div>
 
+                <p>
+                    We have also incorporated the function of producing the Alexander dual of simplicial complexes in the interactive widget above. Interested reader may check it out there as well. 
+                </p>
+
                 <!-- Alexander Dual -->
-                <div class="math-block theorem">
+                <div class="math-block theorem" id="sc-dual">
                     <div class="math-title">(Properties of Alexander Dual)</div>
                     <p>
-                        Let $\Delta$ be a simplical complex on $[n]$. 
+                        Let $X$ be a finite set and $\Delta$ be a simplicial complex on $X$. 
                     </p>
                     <ol>
                         <li>
-                            A subset $F\subseteq [n]$ is a face in $\Delta^\vee$ iff its complement is a non-face of $\Delta$, namely 
+                            A subset $F\subseteq X$ is a face in $\Delta^\vee$ iff its complement is a non-face of $\Delta$, namely 
                             $$ F\in\Delta^\vee\iff F^c\notin\Delta, $$
                             so 
                             $$ |\Delta^\vee|=2^n-|\Delta|. $$
                         </li>
 
                         <li>
-                            The Alexander dual $\Delta$ is also a simplical complex on $[n]$ with 
+                            The Alexander dual $\Delta$ is also a simplicial complex on $X$ with 
                             $$ (\Delta^\vee)^\vee=\Delta. $$
                         </li>
 
@@ -305,23 +394,23 @@
                 <details class="proof">
                     <summary>Proof</summary>
                     <p>
-                        1. For every subset $F\subseteq[n]$, 
+                        1. For every subset $F\subseteq X$, 
                         $$
                             F\in\Delta^\vee\iff\exists G\notin\Delta:F=G^c\iff F^c\notin\Delta. 
                         $$
-                        Thus, the map $F\mapsto F^c$ is a bijection of $2^{[n]}$ mapping $\Delta^\vee$ onto the complement $2^{[n]}\setminus\Delta$, so 
-                        $$ |\Delta^\vee|=|2^{[n]}\setminus\Delta|=2^n-|\Delta|. $$
+                        Thus, the map $F\mapsto F^c$ is a bijection of $2^X$ mapping $\Delta^\vee$ onto the complement $2^X\setminus\Delta$, so 
+                        $$ |\Delta^\vee|=|2^X\setminus\Delta|=2^n-|\Delta|. $$
                     </p>
                     <p>
-                        2. Clearly, $\Delta^\vee$ is also a collection of subsets of $[n]$. Let $F,G\subseteq[n]$ with $G\subseteq F$. If $F\in\Delta^\vee$, by 1, we see that $F^c\notin\Delta$. Here we have $F^c\subseteq G^c$, so $G^c\notin\Delta$ as well whence $G\in\Delta^\vee$ as well. Therefore, we may conclude that $\Delta$ is a simplical complex on $[n]$ as well. 
+                        2. Clearly, $\Delta^\vee$ is also a collection of subsets of $X$. Let $F,G\subseteq X$ with $G\subseteq F$. If $F\in\Delta^\vee$, by 1, we see that $F^c\notin\Delta$. Here we have $F^c\subseteq G^c$, so $G^c\notin\Delta$ as well whence $G\in\Delta^\vee$ as well. Therefore, we may conclude that $\Delta$ is a simplicial complex on $X$ as well. 
                     </p>
                     <p>
-                        Furthermore, for every $F\subseteq[n]$, by 1, 
+                        Furthermore, for every $F\subseteq X$, by 1, 
                         $$ F\in(\Delta^\vee)^\vee\iff F^c\notin\Delta^\vee\iff F=(F^c)^c\in\Delta, $$
                         so $\Delta=(\Delta^\vee)^\vee$ holds for sure. 
                     </p>
                     <p>
-                        3. By 1, we see that $F\subseteq[n]$ is a face (resp. non-face) in $\Delta^\vee$ iff its complement is a non-face (resp. face) in $\Delta$. Since the complement of subsets is bijective and reverses the inclusions, it carries the maximal (resp. minimal) elements onto the minimal (resp. maximal) elements. The desired statement is thus trivial for us. Thus, if $\Delta\ne\emptyset$, 
+                        3. By 1, we see that $F\subseteq X$ is a face (resp. non-face) in $\Delta^\vee$ iff its complement is a non-face (resp. face) in $\Delta$. Since the complement of subsets is bijective and reverses the inclusions, it carries the maximal (resp. minimal) elements onto the minimal (resp. maximal) elements. The desired statement is thus trivial for us. Thus, if $\Delta\ne\emptyset$, 
                         $$
                         \begin{aligned}
                             \dim(\Delta^\vee)&=\max_{F\in\Delta^\vee}(|F|-1)=\max_{F^c\notin\Delta}(|F|-1) \\
@@ -333,17 +422,17 @@
                     </p>
                 </details>
 
-                <!-- Example of Simplical Complexes -->
+                <!-- Example of Simplicial Complexes -->
                 <div class="math-block example">
                     <div class="math-title">(Trivial Examples of Alexander Duals)</div>
                     <ul>
                         <li>
-                            The void complex $\emptyset$ and full complex $2^{[n]}$ are Alexander duals of each other. 
+                            The void complex $\emptyset$ and full complex $2^X$ are Alexander duals of each other. 
                         </li>
                         
                         <li>
-                            The irrelevant complex $\{\emptyset\}$ and the boundary $\partial=2^{[n]}\setminus\{[n]\}$ are also Alexander duals of each other: For every $F\subseteq[n]$, 
-                            $$ F\in\{\emptyset\}^\vee\iff F^c\notin\{\emptyset\}\iff F^c\ne\emptyset\iff F\ne[n]. $$
+                            The irrelevant complex $\{\emptyset\}$ and the boundary $\partial=2^X\setminus\{X\}$ are also Alexander duals of each other: For every $F\subseteq X$, 
+                            $$ F\in\{\emptyset\}^\vee\iff F^c\notin\{\emptyset\}\iff F^c\ne\emptyset\iff F\ne X. $$
                         </li>
                     </ul>
                 </div>
@@ -351,7 +440,7 @@
                 <div class="math-block corollary">
                     <div class="math-title">(Dimension Inequality)</div>
                     <p>
-                        For every simplical complex $\Delta$ on $[n]$, 
+                        For every simplicial complex $\Delta$ on $X$, 
                         $$ n-3\le \dim(\Delta)+\dim(\Delta^\vee)\le 2n-4. $$
                     </p>
                 </div>
@@ -366,28 +455,115 @@
             </section>
 
             <!-- SECTION 2 -->
-            <!-- <section id="sc-chain">
-                <h2>Chain Complexes Associated to Simplical Complexes</h2>
+            <section id="sc-chain">
+                <h2>The $f$-Vector of Simplicial Complexes</h2>
 
                 <div class="math-block definition">
                     <div class="math-title">($f$-Vectors)</div>
-                    Let $\Delta\ne\emptyset$ be a simplical complex on $[n]$ of dimension $d-1$. For each $i=-1,0,\dots,d-1$, we may denoted by 
-                    $$ f_i:=\#\{F\in\Delta\mid |F|=i+1\}, $$
-                    the number of $i$-dimensional faces of $\Delta$. Furthermore, the $d$-tuple 
-                    $$ f(\Delta):=(f_0,f_1,\dots,f_{d-1})\in\mathbb{N}^d $$
-                    is called the <strong>$f$-vector</strong> of $\Delta$. 
+                    <p>
+                        Let $X$ be a finite set and $\Delta\ne\emptyset$ be a simplicial complex on $X$ of dimension $d-1\ge 0$. For each $i=-1,0,\dots,d-1$, we may denoted by 
+                        $$ f_i:=|\{F\in\Delta\mid |F|=i+1\}|, $$
+                        the number of $i$-dimensional faces of $\Delta$. Furthermore, the $d$-tuple 
+                        $$ f(\Delta):=(f_0,f_1,\dots,f_{d-1})\in\mathbb{N}^d $$
+                        is called the <strong>$f$-vector</strong> of $\Delta$. 
+                    </p>
                 </div>
 
                 <p>
                     Note that $f_{-1}=1$ since $\emptyset\in\Delta$, which explains why we did not include it in the definition of $f$-vectors. 
                 </p>
 
-                
-            </section> -->
+                <p>
+                    Given two integers $a,d>0$, we may let 
+                    $$ a=\binom{k(d)}{d}+\binom{k(d-1)}{d-1}+\dots+\binom{k(j)}{j}, $$
+                    where 
+                    $$ k(d)>k(d-1)>\dots>k(j)\ge j\ge 1 $$
+                    be the unique $d$-th Macaulay representation of $a$. We shall set 
+                    $$ a^{(d)}=\binom{k(d)}{d+1}+\dots\binom{k(d-1)}{d}+\dots+\binom{k(j)}{j+1}. $$
+                </p>
+
+                <div class="math-block theorem">
+                    <div class="math-title">(Characterization of $f$-Vectors, Kruskal-Katona)</div>
+                    <p>
+                        Let $d\ge 1$ be a positive integer. A vector $(f_0,f_1,\dots,f_{d-1})\in\mathbb{N}^d$ is the $f$-vector of some $(d-1)$-dimensional simplicial complex iff $0 < f_{i+1}\le f_i^{(i+1)}$ for each $i=0,1,\dots,d-2$. 
+                    </p>
+                </div>
+
+                <div class="math-block definition">
+                    <div class="math-title">(Skeleta of Simplicial Complexes)</div>
+                    <p>
+                        Let $X$ be a finite set and $\Delta\ne\emptyset$ be a simplicial complex on $X$ of dimension $d-1\ge 0$. For each $j\ge -1$, the <strong>$j$-th skeleton</strong> of $\Delta$ is defined as the collection $\Delta^{(j)}$ of all faces in $\Delta$ of dimension at most $j$, namely 
+                        $$ \Delta^{(j)}=\{F\in\Delta\mid|F|\le j+1\}. $$
+                    </p>
+                </div>
+
+                <p>
+                    Since the cardinality of sets is monotone respect to set inclusions, one can see that the $j$-skelton $\Delta^{(j)}$ is downward-closed whence also a simplicial complex on $X$. 
+                </p>
+
+                <p>
+                    Clearly, we have $\Delta^{(-1)}=\{\emptyset\}$ and also $\Delta^{(j)}=\Delta$ for all $j\ge d-1$. Furthermore, the inclusion $\Delta^{(j)}\subseteq\Delta^{(j+1)}$ trivially holds for each $j$, hence together, we get a filtration of simplicial complexes on $X$: 
+                    $$ \{\emptyset\}=\Delta^{(-1)}\subseteq\Delta^{(0)}\subseteq\dots\subseteq\Delta^{(d-1)}=\Delta. $$
+                </p>
+
+                <p>
+                    Besides, for $-1\le j\le d-1$, it is also immediate for us that $\dim(\Delta^{(j)})=j$ and also 
+                    $$  f(\Delta^{(j)})=(f_0,f_1,\dots,f_j), $$
+                    which is precisely the truncation of the $f$-vector of $\Delta$. Now also 
+                    $$ |\Delta^{(j)}|=\sum_{i=-1}^j f_i \quad\text{and}\quad f_j=|\Delta^{(j)}|-|\Delta^{(j-1)}|. $$
+                </p>
+
+                <div class="math-block definition">
+                    <div class="math-title">($h$-Vectors)</div>
+                    <p>
+                        Let $X$ be a finite set and $\Delta\ne\emptyset$ be a simplicial complex on $X$ of dimension $d-1\ge 0$. Then the <strong>$h$-vector</strong> of $\Delta$ is defined as the unique vector $h(\Delta)=(h_0,h_1,\dots,h_d)\in\mathbb{N}^{d+1}$ such that 
+                        $$ \sum_{i=0}^d f_{i-1}(t-1)^{d-i}=\sum_{i=0}^d h_it^{d-i}, $$
+                        where $t$ is an arbitrary indeterminate. 
+                    </p>
+                </div>
+
+                <div class="math-block theorem">
+                    <div class="math-title">(Relationships Between $f$ and $h$-Vectors)</div>
+                    <p>
+                        Let $X$ be a finite set and $\Delta\ne\emptyset$ be a simplicial complex on $X$ of dimension $d-1\ge 0$. For each $k=0,1,\dots,d$, 
+                        $$ h_k=\sum_{i=0}^k(-1)^{k-i}\binom{d-i}{k-i}f_{i-1}\quad\text{and}\quad f_{k-1}=\sum_{i=0}^k\binom{d-i}{k-i}h_i. $$
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- SECTION 3 -->
+            <section id="sc-chain">
+                <h2>Chain Complexes Associated to Simplicial Complexes</h2>
+
+                <p>
+                    For each $i\in F\subseteq[n]$, we may define 
+                    $$ \varepsilon(i,F):=(-1)^{\#\{j\in F\mid j< i\}}. $$
+                </p>
+
+                <div class="math-block definition">
+                    <div class="math-title">(Associated Chain Complexes)</div>
+                    <p>
+                        Let $R$ be a ring and $\Delta$ be a simplicial complex on $[n]$. 
+                    </p>
+                    <ul>
+                        <li>
+                            For each $i\in\mathbb{Z}$, if $-1\le i\le n-1$, we let $\tilde{C}_i(\Delta;R)$ be the free $R$-module on symbols $e_F$ with $F\in\Delta$ an $i$-dimensional face; otherwise we set $\tilde{C}_i(\Delta;R)=0$. 
+                        </li>
+
+                        <li>
+                            Furthermore, we may let $\partial_i:\tilde{C}_i(\Delta;R)\to \tilde{C}_{i-1}(\Delta;R)$ be the unique $R$-linear map with 
+                            $$ \partial_i(e_F):=\sum_{i\in F}(\varepsilon(i,F)\cdot e_{F\setminus\{i\}}), $$
+                            where $F\in\Delta$ is an $i$-dimensional face. 
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
 
             <!-- <div class="math-block theorem" id="sc-op">
-                <div class="math-title">(Operations on Simplical Complexes)</div>
-                Let $\Delta_1,\Delta_2$ be simplical
+                <div class="math-title">(Operations on Simplicial Complexes)</div>
+                Let $\Delta_1,\Delta_2$ be simplicial
             </div> -->
             <!-- Simplexes II -->
             <!-- <div class="math-block example">
