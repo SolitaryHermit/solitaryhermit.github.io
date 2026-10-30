@@ -908,3 +908,39 @@ li > code {
     display: block;
     margin-bottom: 0.4rem;
 }
+
+/* ==========================================================================
+   Parametric Tangents Widget Styles
+   ========================================================================== */
+.pt-preset-btn {
+    padding: 0.35rem 0.65rem;
+    background-color: #334155;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.pt-preset-btn:hover {
+    background-color: #475569;
+}
+
+.pt-preset-btn.active {
+    background-color: var(--def-color, #0284c7) !important;
+}
+
+#pt-play-btn {
+    background-color: var(--def-color, #0284c7);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#pt-play-btn:hover {
+    opacity: 0.9;
+}

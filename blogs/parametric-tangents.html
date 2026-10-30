@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tangents to Parametric Curves - Notes & Interactive Explorer</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/math.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['[', ']']]
+            }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- Site & Widget Scripts -->
+    <script src="../js/math-notes.js" defer></script>
+    <script src="../js/parametric-tangents-widget.js" defer></script>
+</head>
+<body class="math-page">
+    <div class="page-layout">
+        <main class="note-body">
+            <h1 class="math-title-main">Tangents and Singularities of Parametric Curves</h1>
+            <p class="math-subtitle">A geometric study of velocity vectors, vertical/horizontal tangents, and cuspidal points</p>
+
+            <nav id="toc" class="toc-container compact" aria-label="Table of Contents"></nav>
+
+            <section id="theoretical-foundations">
+                <h2>Differential Calculus for Parametric Curves</h2>
+                <div class="math-block definition">
+                    <span class="math-title">Parametric Plane Curve &amp; Velocity Vector</span>
+                    <p>Let $C \subset \mathbb{R}^2$ be a plane curve parameterized by $C(t) = \big(x(t), y(t)\big)$ where $x, y \in C^1(I)$ on an interval $I \subseteq \mathbb{R}$. The <strong>velocity vector</strong> (or tangent vector) at $t_0$ is defined as:</p>
+                    $$\mathbf{r}'(t_0) = \left( x'(t_0),\, y'(t_0) \right) = x'(t_0)\mathbf{i} + y'(t_0)\mathbf{j}$$
+                </div>
+
+                <div class="math-block theorem">
+                    <span class="math-title">Slope of the Tangent Line</span>
+                    <p>If $x'(t_0) \neq 0$, the slope $m(t_0)$ of the tangent line to the trace of $C$ at $\big(x(t_0), y(t_0)\big)$ is given by the chain rule:</p>
+                    $$\frac{dy}{dx} = \frac{dy/dt}{dx/dt} = \frac{y'(t_0)}{x'(t_0)}$$
+                    <p>The tangent line equation in point-slope form is:</p>
+                    $$y - y(t_0) = \frac{y'(t_0)}{x'(t_0)} \Big( x - x(t_0) \Big)$$
+                </div>
+
+                <div class="math-block lemma">
+                    <span class="math-title">Classification of Tangent Behaviors</span>
+                    <ol>
+                        <li><strong>Horizontal Tangent:</strong> Occurs when $y'(t_0) = 0$ and $x'(t_0) \neq 0$. Here, $\frac{dy}{dx} = 0$, giving horizontal tangent line $y = y(t_0)$.</li>
+                        <li><strong>Vertical Tangent:</strong> Occurs when $x'(t_0) = 0$ and $y'(t_0) \neq 0$. Here, $\left\vert{} \frac{dy}{dx} \right\vert{} \to \infty$, giving vertical line $x = x(t_0)$.</li>
+                        <li><strong>Singular / Cuspidal Point ($x'(t) = 0 = y'(t)$):</strong> When $\mathbf{r}'(t_0) = (0, 0)$, the velocity vanishes. The point is <em>singular</em>. The tangent direction, if it exists, must be evaluated via L'Hôpital's rule or limits:
+                            $$m = \lim_{t \to t_0} \frac{y'(t)}{x'(t)}$$
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section id="interactive-demonstrator">
+                <h2>Interactive Tangent &amp; Velocity Explorer</h2>
+                <p>Drag the parameter slider $t$ to examine how the velocity vector $\mathbf{r}'(t)$ directs the tangent line along the curve, or select one of the classical presets.</p>
+
+                <!-- Interactive Widget Container -->
+                <div class="interactive-widget" id="parametric-tangent-app">
+                    <div class="widget-header">
+                        <span class="widget-title">Interactive: Parametric Tangent Line &amp; Velocity Vector</span>
+                    </div>
+
+                    <div class="widget-controls-stack">
+                        <!-- Presets -->
+                        <div class="widget-controls-row presets-row">
+                            <span class="presets-label">Examples:</span>
+                            <button class="pt-preset-btn active" data-preset="cusp">Semicubical Parabola (Cusp at $t=0$)</button>
+                            <button class="pt-preset-btn" data-preset="ellipse">Ellipse (Vertical &amp; Horiz.)</button>
+                            <button class="pt-preset-btn" data-preset="loop">Nodal Cubic (Self-Intersection)</button>
+                            <button class="pt-preset-btn" data-preset="astroid">Astroid (4 Singularities)</button>
+                        </div>
+
+                        <!-- Parameter Slider -->
+                        <div class="widget-controls-row" style="margin-top: 0.5rem;">
+                            <label for="pt-t-slider" style="font-weight: 600;">Parameter $t$:</label>
+                            <input type="range" id="pt-t-slider" min="-2" max="2" step="0.01" value="0.8" style="flex: 1; max-width: 280px;">
+                            <span id="pt-t-val" style="font-family: monospace; font-weight: 600; min-width: 50px;">t = 0.80</span>
+                            <button id="pt-play-btn" style="padding: 0.25rem 0.65rem;">Animate</button>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start; margin-top: 1rem;">
+                        <!-- Canvas Plot -->
+                        <div class="widget-canvas-container" style="flex: 0 0 auto;">
+                            <canvas id="pt-canvas" width="440" height="440"></canvas>
+                        </div>
+
+                        <!-- Dynamic Coordinate and Derivative Inspector -->
+                        <div class="sc-data-panel" style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 0.75rem;">
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Curve Equations:</span>
+                                <div id="pt-eq-display" style="font-family: monospace; font-size: 0.95rem; font-weight: 600; color: #1e293b;"></div>
+                            </div>
+
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Point Position $C(t)$:</span>
+                                <div id="pt-pos-display" style="font-family: monospace; font-size: 0.9rem; color: var(--def-color); font-weight: 600;"></div>
+                            </div>
+
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Derivatives &amp; Velocity Vector:</span>
+                                <div id="pt-deriv-display" style="font-family: monospace; font-size: 0.9rem; color: #334155; line-height: 1.5;"></div>
+                            </div>
+
+                            <div class="reducer-result-box">
+                                <span class="reducer-label">Tangent State &amp; Slope $dy/dx$:</span>
+                                <div id="pt-slope-display" style="font-size: 0.9rem; font-weight: 600;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul>
+                    <li>
+                        <strong>Semicubical Parabola ($x = t^2, y = t^3$):</strong> Demonstrates a classic cusp at $t = 0$, where $x'(0) = 0$ and $y'(0) = 0$. Although the velocity vanishes, the directional limit of slopes satisfies $\lim_{t \to 0} \frac{dy}{dx} = \lim_{t \to 0} \frac{3}{2}t = 0$, producing a horizontal cuspidal tangent.
+                    </li>
+                    <li>
+                        <strong>Ellipse ($x = 2\cos t, y = 1.3\sin t$):</strong> Highlights clean alternations between vertical tangents (at $t = 0, \pm\pi$, where $x'(t) = 0$) and horizontal tangents (at $t = \pm\frac{\pi}{2}$, where $y'(t) = 0$).
+                    </li>
+                    <li>
+                        <strong>Nodal Cubic ($x = t^2 - 1, y = t^3 - t$):</strong> Exhibits a self-intersection (node) at the origin $(0, 0)$ crossed at two distinct parameter values ($t = -1$ and $t = 1$), yielding two distinct tangent slopes at the exact same geometric point.
+                    </li>
+                    <li>
+                        <strong>Astroid ($x = \cos^3 t, y = \sin^3 t$):</strong> Features four singular points at $t \in \{0, \frac{\pi}{2}, \pi, \frac{3\pi}{2}\}$ where $x'(t) = y'(t) = 0$. The slope limit approaches vertical or horizontal orientations as $t$ nears each cusp.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- 3. Tool Manual -->
+            <section id="user-manual">
+                <h2>User Manual</h2>
+                <ol>
+                    <li>
+                        <strong>Selecting a Curve:</strong> Click any of the four preset buttons at the top of the widget to change the curve parameterization and adjust the parameter interval automatically.
+                    </li>
+                    <li>
+                        <strong>Inspecting Points:</strong> Drag the <strong>Parameter $t$</strong> slider to move the evaluated point $C(t)$ along the trajectory.
+                    </li>
+                    <li>
+                        <strong>Playback / Animation:</strong> Click <strong>Animate</strong> to sweep continuously across the parameter interval. Click <strong>Pause</strong> to halt at any point of interest.
+                    </li>
+                    <li>
+                        <strong>Visual Indicators on Canvas:</strong>
+                        <ul>
+                            <li><strong style="color: #475569;">Dark Grey Arrow:</strong> The instantaneous velocity vector $\mathbf{r}'(t) = (x'(t), y'(t))$.</li>
+                            <li><strong style="color: #d97706;">Dashed Amber Line:</strong> Standard oblique tangent line with finite non-zero slope $dy/dx$.</li>
+                            <li><strong style="color: #16a34a;">Dashed Green Line:</strong> Horizontal tangent ($y'(t) = 0, x'(t) \neq 0$).</li>
+                            <li><strong style="color: #dc2626;">Dashed Red Line:</strong> Vertical tangent ($x'(t) = 0, y'(t) \neq 0$).</li>
+                            <li><strong style="color: #ef4444;">Dashed Red Circle:</strong> Vanishing velocity singularity ($x'(t) = 0$ and $y'(t) = 0$), indicating a point where the standard slope formula is indeterminate and requires limits.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Side Inspector Panel:</strong> Displays exact analytical coordinates $C(t)$, instantaneous velocities $(x'(t), y'(t))$, speed $|\mathbf{r}'(t)|$, and computed slope $\frac{dy}{dx}$ in real time.
+                    </li>
+                </ol>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
